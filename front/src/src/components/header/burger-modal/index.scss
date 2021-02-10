@@ -1,0 +1,58 @@
+.burger-modal {
+    background-color: black;
+    opacity: 0.9;
+
+    & .modal-content {
+        background-color: transparent;
+    }
+}
+
+.burger-list-group {
+    background-color: transparent;
+    color: white;
+
+    & .list-group-item {
+        background-color: transparent;
+        font-size: 36px;
+        line-height: 1.5em;
+        font-weight: 700;
+        letter-spacing: 0.025em;
+        color: #ebebeb;
+        text-transform: uppercase;
+        font-family: "Roboto", sans-serif;
+
+        &:hover, &:active, &:focus {
+            background-color: transparent;
+            color: white;
+        }
+
+        & span {
+            width: max-content;
+
+            &:after {
+                background: none repeat scroll 0 0 transparent;
+                bottom: 0;
+                content: "";
+                display: block;
+                height: 2px;
+                left: 50%;
+                position: absolute;
+                background: #fff;
+                transition: width 0.3s ease 0s, left 0.3s ease 0s;
+                width: 0;
+            }
+
+            &:hover:after {
+                width: 100%;
+                left: 0;
+            }
+
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    }
+}

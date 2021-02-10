@@ -1,27 +1,34 @@
 import React, { useCallback, useState } from 'react';
-import HamburgerMenu from "react-hamburger-menu";
+import { Row, Col, Form, FormControl, InputGroup, Navbar, Button } from 'react-bootstrap';
+import { AccountModal } from './account-modal';
+import { BurgerButton } from './burger-button';
+import { BurgerModal } from './burger-modal';
 
 export const Header: React.FC<{}> = () => {
-    const [hamburgerIsOpen, setHamburgerIsOpen] = useState(false);
+    const [burgerModalIsOpen, setBurgerModalIsOpen] = useState(false);
+    const [accountModalIsOpen, setAccountModalIsOpen] = useState(false);
 
-    const handleHamburgerClicked = useCallback(() => {
-        setHamburgerIsOpen(e => !e);
-    }, [setHamburgerIsOpen])
+    const toggleBurgerModal = useCallback(() => {
+        setAccountModalIsOpen(e => false);
+        setBurgerModalIsOpen(e => !e);
+    }, [setBurgerModalIsOpen, setAccountModalIsOpen])
+
+    const toggleAccountModal = useCallback(()=>{
+        setBurgerModalIsOpen(false);
+        setAccountModalIsOpen(e => !e);
+    }, [setBurgerModalIsOpen, setAccountModalIsOpen])
 
     return (
-        <div>
-            <span style={{ cursor: "pointer" }}>
-                <HamburgerMenu
-                    isOpen={hamburgerIsOpen}
-                    menuClicked={handleHamburgerClicked}
-                    width={18}
-                    height={15}
-                    strokeWidth={1}
-                    rotate={0}
-                    color='black'
-                    borderRadius={0}
-                    animationDuration={0.5}
-                />
-            </span>
-        </div>);
+        <Navbar className="justify-content-between">
+            <Form inline className="pl-4 pt-1">
+                <Button onClick={toggleAccountModal} variant="outline-dark">Новая Анкета</Button>
+            </Form>
+            <Form inline className="pr-4 pt-1">
+                <BurgerButton isOpen={burgerModalIsOpen} onClick={toggleBurgerModal} />
+            </Form>
+
+            <AccountModal isOpen={accountModalIsOpen} toggleIsOpen={toggleAccountModal} />
+            <BurgerModal isOpen={burgerModalIsOpen} toggleIsOpen={toggleBurgerModal} />
+        </Navbar>
+    );
 }
