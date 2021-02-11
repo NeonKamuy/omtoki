@@ -1,4 +1,4 @@
-import Joi from "joi";
+import * as Joi from "joi";
 
 // Base User Schema
 export const UserBaseSchema = Joi.object({
