@@ -8,7 +8,6 @@ import { UserBaseSchema } from './helper-schemas';
 @Controller("/api/users")
 export class UserController {
   constructor(
-    @Inject(TYPES.Models.User)
     private readonly _UserService: UserService
   ) {}
 
@@ -20,7 +19,7 @@ export class UserController {
   @Post("/")
   public addUser(
     @wValidatedArg(UserBaseSchema) args: IUserBase
-  ): Promise<IIndexedUser> {
+  ): Promise<IIndexedUser[]> {
     return this._UserService.addUser(args);
   }
 }

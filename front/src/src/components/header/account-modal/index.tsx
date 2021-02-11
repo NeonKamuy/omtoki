@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import UserController from "../../../controllers/users";
 import { IProps } from "./interfaces";
 
 export const AccountModal: React.FC<IProps> = (props) => {
     const { isOpen, toggleIsOpen } = props;
+
+    const handleFormSubmit = useCallback((args) => {
+        toggleIsOpen();
+        const { target: [{value: name}, {value: description}] } = args;
+        UserController.addUser({ data: { name, description }, onLoaded: () => window.location.reload() });
+    }, [])
 
     return (
         <Modal
@@ -20,7 +27,7 @@ export const AccountModal: React.FC<IProps> = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={handleFormSubmit} id="account-creation-form" action="#">
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Полное Имя</Form.Label>
                         <Form.Control type="text" placeholder="Имярек Имярекович" />
@@ -32,7 +39,7 @@ export const AccountModal: React.FC<IProps> = (props) => {
                 </Form>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="outline-dark" onClick={toggleIsOpen}>Закрыть</Button>
+                <Button variant="outline-dark" type="submit" form="account-creation-form">Отправить</Button>
             </Modal.Footer>
         </Modal>
     );

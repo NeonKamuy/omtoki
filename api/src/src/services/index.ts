@@ -13,9 +13,10 @@ export default class UserService {
         return response;
     }
 
-    public async addUser(args: IUserBase): Promise<IIndexedUser> {
+    public async addUser(args: IUserBase): Promise<IIndexedUser[]> {
         const userDoc = await this._UserModel.create(args);
-        const response = UserService.toIndexedUser(userDoc);
+        const updatedUserDocs = await this._UserModel.find();
+        const response = UserService.toIndexedUser(updatedUserDocs);
         return response;
     }
 

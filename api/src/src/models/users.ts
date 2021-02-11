@@ -1,22 +1,15 @@
 import { IUserBase } from "shared/interfaces/user";
-import { prop, getModelForClass, DocumentType } from '@typegoose/typegoose';
+import { prop, getModelForClass, DocumentType, modelOptions } from '@typegoose/typegoose';
 import { ObjectId } from "bson";
+import { getTypegooseOptions } from "./db-config/model-options";
 
+@modelOptions(getTypegooseOptions("users"))
 class User implements IUserBase {
-    @prop()
-    _id: ObjectId;
-
     @prop()
     name: string;
 
     @prop()
     description: string;
-
-    @prop()
-    createdAt: Date;
-
-    @prop()
-    updatedAt: Date;
 }
 
 const UserModel = getModelForClass(User);
