@@ -5,8 +5,6 @@ export interface IUserBase {
 }
 
 // Single User With Id
-export interface IIndexedUser {
+export interface IIndexedUser extends IUserBase {
     id: string;
-    name: string;
-    description: string;
 }
