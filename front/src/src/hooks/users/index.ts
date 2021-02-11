@@ -14,7 +14,7 @@ export const useUsers = () => {
 }
 
 // Get User Triplets
-export const useUserTriplets = () => {
+export const useUserFives = () => {
     const users = useUsers();
 
     const userTriplets = useMemo(() => {
@@ -25,7 +25,7 @@ export const useUserTriplets = () => {
             const user = users[i];
             currentArr.push(user);
 
-            if (currentArr.length === 3 || i === users.length - 1) {
+            if (currentArr.length === 5 || i === users.length - 1) {
                 response.push(currentArr);
                 currentArr = [];
             }
