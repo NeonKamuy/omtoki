@@ -51,12 +51,12 @@ export default class ParticlesManager {
             }
 
             // If particle out of horisontal bounds, then change direction to opposite
-            if (particle.x + particle.radius > this.__canvas.width || particle.x - particle.radius < 0) {
+            if (particle.x + particle.radius >= this.__canvas.width || particle.x - particle.radius <= 0) {
                 particle.vx = -particle.vx;
             }
 
             // If particle out of vertical bounds, then change direction to opposite
-            if (particle.y + particle.radius > this.__canvas.height || particle.y - particle.radius < 0) {
+            if (particle.y + particle.radius >= this.__canvas.height || particle.y - particle.radius <= 0) {
                 particle.vy = -particle.vy;
             }
 
