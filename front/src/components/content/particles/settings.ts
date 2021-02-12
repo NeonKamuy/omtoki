@@ -3,10 +3,10 @@ import { ICoordinates } from "./interfaces";
 export const __SETTINGS__ = {
     MAX_FPS: 20,
     PARTICLE: {
-        RADIUS: 5,
+        RADIUS: 3,
         REACT_ON_HOVER: true,
         MOVE: {
-            direction: "left" as IVelocityDirection,
+            direction: "none" as IVelocityDirection,
             straight: false,
             random: true,
             speed: 2,

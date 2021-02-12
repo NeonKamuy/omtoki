@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Row, Col, Form, FormControl, InputGroup, Navbar, Button } from 'react-bootstrap';
-import { AccountModal } from './account-modal';
-import { BurgerButton } from './burger-button';
-import { BurgerModal } from './burger-modal';
+import { AccountModalButton } from './account-modal';
+import { BurgerModalButton } from './burger-modal';
+import { BurgerButton } from './burger-modal/burger-button';
 
 export const Header: React.FC<{}> = () => {
     const [burgerModalIsOpen, setBurgerModalIsOpen] = useState(false);
@@ -19,16 +19,13 @@ export const Header: React.FC<{}> = () => {
     }, [setBurgerModalIsOpen, setAccountModalIsOpen])
 
     return (
-        <Navbar className="justify-content-between">
-            <Form inline className="pl-4 pt-1">
-                <Button onClick={toggleAccountModal} variant="outline-dark">Новая Анкета</Button>
+        <Navbar className="justify-content-between" style={{backgroundColor: "transparent"}}>
+            <Form inline className="pl-lg-4 pl-xs-2 pt-1">
+                <AccountModalButton isOpen={accountModalIsOpen} toggleIsOpen={toggleAccountModal} />
             </Form>
-            <Form inline className="pr-4 pt-1">
-                <BurgerButton isOpen={burgerModalIsOpen} onClick={toggleBurgerModal} />
+            <Form inline className="pr-lg-4 pr-xs-2 pt-1">
+                <BurgerModalButton isOpen={burgerModalIsOpen} toggleIsOpen={toggleBurgerModal} />
             </Form>
-
-            <AccountModal isOpen={accountModalIsOpen} toggleIsOpen={toggleAccountModal} />
-            <BurgerModal isOpen={burgerModalIsOpen} toggleIsOpen={toggleBurgerModal} />
         </Navbar>
     );
 }

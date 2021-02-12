@@ -14,18 +14,15 @@ export const ParticleContainer = React.memo((props: { setContainerRef: (node: HT
     // Then Provide ContainerRef Here
 
     return (
-        <div style={outerDivStyle}>
-            <div style={innerDivStyle} ref={setContainerRef}></div>
+        <div style={outerDivStyle} ref={setContainerRef}>
             <UserTooltip />
         </div>
     );
 });
 
 const outerDivStyle: React.HTMLAttributes<HTMLDivElement>["style"] = {
-    position: "relative",
-    height: "100%",
-};
-
-const innerDivStyle: React.HTMLAttributes<HTMLDivElement>["style"] = {
-    height: "100%",
+    position: "fixed",
+    top: 0,
+    height: "100vh",
+    width: "100vw",
 };

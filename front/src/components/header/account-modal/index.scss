@@ -1,0 +1,7 @@
+#account-modal-button {
+    &:not(:hover) {
+        background-color: white;
+    }
+
+    z-index: 1;
+}

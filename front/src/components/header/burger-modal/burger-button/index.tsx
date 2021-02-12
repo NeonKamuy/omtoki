@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from "react";
-import "./index.scss";
+import "../styles/button.scss";
 import { IProps } from "./interfaces";
 
 export const BurgerButton: React.FC<IProps> = (props) => {

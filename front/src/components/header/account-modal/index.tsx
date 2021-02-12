@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import UserController from "../../../controllers/users";
 import { IProps } from "./interfaces";
+import "./index.scss";
 
-export const AccountModal: React.FC<IProps> = (props) => {
+export const AccountModalButton:  React.FC<IProps> = (props) => {
     const { isOpen, toggleIsOpen } = props;
 
     const handleFormSubmit = useCallback((args) => {
@@ -13,6 +14,8 @@ export const AccountModal: React.FC<IProps> = (props) => {
     }, [])
 
     return (
+        <>
+        <Button onClick={toggleIsOpen} variant="outline-dark" id="account-modal-button">Новая Анкета</Button>
         <Modal
             show={isOpen}
             size="lg"
@@ -42,5 +45,6 @@ export const AccountModal: React.FC<IProps> = (props) => {
                 <Button variant="outline-dark" type="submit" form="account-creation-form">Отправить</Button>
             </Modal.Footer>
         </Modal>
+        </>
     );
 }
