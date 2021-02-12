@@ -15,7 +15,7 @@ $--breakpoint-sm: 576px;
 
     & .list-group-item {
         font-size: 36px;
-        @media all and (max-width: 576px) {
+        @media all and (max-width: $--breakpoint-sm) {
             font-size: 23px;
         }
 

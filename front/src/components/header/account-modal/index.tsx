@@ -33,11 +33,11 @@ export const AccountModalButton:  React.FC<IProps> = (props) => {
                 <Form onSubmit={handleFormSubmit} id="account-creation-form" action="#">
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Полное Имя</Form.Label>
-                        <Form.Control type="text" placeholder="Имярек Имярекович" />
+                        <Form.Control type="text" placeholder="Имя Фамилия" />
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>Краткое описание</Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="Мне мало лет я много жил" />
+                        <Form.Control as="textarea" rows={3} placeholder="Пара слов о вас..." />
                     </Form.Group>
                 </Form>
             </Modal.Body>
