@@ -5,7 +5,7 @@ import { ParticleContainer } from "./particles";
 import { useParticlesManager } from "./particles/hooks/w-ref-particles";
 
 export const Content: React.FC<{}> = () => {
-    const [setContainerRef, handleElementsChange] = useParticlesManager(new Array(500).fill(0));
+    const [setContainerRef, handleElementsChange] = useParticlesManager(new Array(5000).fill(0));
     const elements: IIndexedUser[] = useUsers();
 
     useEffect(() => {

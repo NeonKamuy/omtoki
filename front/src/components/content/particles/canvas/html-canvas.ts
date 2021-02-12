@@ -81,4 +81,5 @@ export default class HTMLCanvas {
     public get height() { return this.__container.offsetHeight; }
     public get context() { return this.__context; }
     public get mouse() {return this.__mouse;}
+    public get cursorStatus() { return this.__cursorStatus; }
 }

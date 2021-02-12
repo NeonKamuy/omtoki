@@ -5,6 +5,7 @@ import { ICoordinates } from '../interfaces';
 import { __SETTINGS__ } from '../settings';
 
 export default class Particle {
+    public readonly id = `${Math.random() * 9999}${Date.now()}${Math.random() * 9999}`;
     private readonly __canvas: ParticlesCanvas;
     private readonly __data: any;
 
