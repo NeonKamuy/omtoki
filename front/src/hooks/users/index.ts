@@ -12,27 +12,3 @@ export const useUsers = () => {
 
     return users;
 }
-
-// Get User Triplets
-export const useUserFives = () => {
-    const users = useUsers();
-
-    const userTriplets = useMemo(() => {
-        const response: IIndexedUser[][] = [];
-        let currentArr: IIndexedUser[] = [];
-
-        for (let i = 0; i < users.length; ++i) {
-            const user = users[i];
-            currentArr.push(user);
-
-            if (currentArr.length === 5 || i === users.length - 1) {
-                response.push(currentArr);
-                currentArr = [];
-            }
-        }
-
-        return response;
-    }, [users]);
-
-    return userTriplets;
-}
