@@ -1827,6 +1827,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/random-name@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@types/random-name/-/random-name-0.1.0.tgz#cd2a329c15850a067841f38f7939691eeec01bf4"
+  integrity sha512-QA0nl1t7RN1k5YeBH0jxyRD34MDJ9pW+fahEnPhWFNgFhiV5TJ8nm5+pR6NEev7z9SiWhZswnDPb9w0DP7N7bw==
+
 "@types/react-bootstrap@^0.32.25":
   version "0.32.25"
   resolved "https://registry.yarnpkg.com/@types/react-bootstrap/-/react-bootstrap-0.32.25.tgz#fdea798f9a2623a161ed61939898078ae841df1e"
@@ -9301,6 +9306,11 @@ raf@^3.4.1:
   integrity sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
   dependencies:
     performance-now "^2.1.0"
+
+random-name@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/random-name/-/random-name-0.1.2.tgz#20a1ad0efce9976764c5dd3c418c7018b57e816d"
+  integrity sha1-IKGtDvzpl2dkxd08QYxwGLV+gW0=
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
