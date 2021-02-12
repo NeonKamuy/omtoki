@@ -42,32 +42,19 @@ export default class ParticlesManager {
                 continue;
             }
 
+            // If particle out of horisontal bounds, then change direction to opposite
+            if (particle.x + particle.radius > this.__canvas.width || particle.x - particle.radius < 0) {
+                particle.vx = -particle.vx;
+            }
+
+            // If particle out of vertical bounds, then change direction to opposite
+            if (particle.y + particle.radius > this.__canvas.height || particle.y - particle.radius < 0) {
+                particle.vy = -particle.vy;
+            }
+
             const ms = this.__move.speed / 2;
             particle.x += particle.vx * ms;
             particle.y += particle.vy * ms;
-
-            const new_pos = {
-                x_left: -particle.radius,
-                x_right: this.__canvas.width + particle.radius,
-                y_top: -particle.radius,
-                y_bottom: this.__canvas.height + particle.radius,
-            };
-
-            if (particle.x - particle.radius > this.__canvas.width) {
-                particle.x = new_pos.x_left;
-                particle.y = Math.random() * this.__canvas.height;
-            } else if (particle.x + particle.radius < 0) {
-                particle.x = new_pos.x_right;
-                particle.y = Math.random() * this.__canvas.height;
-            }
-
-            if (particle.y - particle.radius > this.__canvas.height) {
-                particle.y = new_pos.y_top;
-                particle.x = Math.random() * this.__canvas.width;
-            } else if (particle.y + particle.radius < 0) {
-                particle.y = new_pos.y_bottom;
-                particle.x = Math.random() * this.__canvas.width;
-            }
         }
 
         const { eventOn, eventOff } = __SETTINGS__.TOOLTIP;

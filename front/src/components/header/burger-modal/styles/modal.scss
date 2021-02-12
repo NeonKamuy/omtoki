@@ -1,3 +1,5 @@
+$--breakpoint-sm: 576px;
+
 .burger-modal {
     background-color: black;
     opacity: 0.9;
@@ -12,8 +14,12 @@
     color: white;
 
     & .list-group-item {
-        background-color: transparent;
         font-size: 36px;
+        @media all and (max-width: 576px) {
+            font-size: 23px;
+        }
+
+        background-color: transparent;
         line-height: 1.5em;
         font-weight: 700;
         letter-spacing: 0.025em;
@@ -21,7 +27,9 @@
         text-transform: uppercase;
         font-family: "Roboto", sans-serif;
 
-        &:hover, &:active, &:focus {
+        &:hover,
+        &:active,
+        &:focus {
             background-color: transparent;
             color: white;
         }

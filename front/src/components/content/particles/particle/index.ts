@@ -98,5 +98,7 @@ export default class Particle {
     public get y() { return this.__coordinates.y; }
     public set y(y) { this.__coordinates.y = y; }
     public get vx() { return this.__velocity.x; }
+    public set vx(vx) { this.__velocity.x = vx; }
     public get vy() { return this.__velocity.y; }
+    public set vy(vy) { this.__velocity.y = vy; }
 }
