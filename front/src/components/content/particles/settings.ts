@@ -22,6 +22,10 @@ export const __SETTINGS__ = {
             'top-left': { x: -0.5, y: -0.5 },
             none: { x: 0, y: 0 },
         } as Record<IVelocityDirection, ICoordinates>
+    },
+    TOOLTIP: {
+        eventOn: "usertooltipopen",
+        eventOff: "usertooltipclose"
     }
 }
 

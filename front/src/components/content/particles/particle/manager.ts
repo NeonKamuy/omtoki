@@ -3,7 +3,8 @@ import ParticlesCanvas from "../canvas/index";
 import { __SETTINGS__ } from "../settings";
 import { IParticlesMove } from "./interfaces";
 import { IMouseStatus } from "../canvas/interfaces";
-import { IIndexedUser } from "../../../shared/interfaces/user";
+import { IIndexedUser } from "../../../../shared/interfaces/user";
+import { ICoordinates } from "../interfaces";
 
 export default class ParticlesManager {
     private readonly __canvas: ParticlesCanvas;
@@ -28,7 +29,7 @@ export default class ParticlesManager {
     }
 
     public prepareNextFrame() {
-        let cursorIsPointer = false;
+        let cursorIsPointer: ICoordinates | false = false;
 
         for (let i = 0; i < this.__particles.length; i++) {
             const particle = this.__particles[i];
@@ -37,7 +38,7 @@ export default class ParticlesManager {
 
             // move the particle
             if (!enableMove) {
-                !cursorIsPointer && (cursorIsPointer = true);
+                !cursorIsPointer && (cursorIsPointer = { x: particle.x, y: particle.y });
                 continue;
             }
 
@@ -69,7 +70,11 @@ export default class ParticlesManager {
             }
         }
 
-        this.__canvas.pointerCursor(cursorIsPointer);
+        const { eventOn, eventOff } = __SETTINGS__.TOOLTIP;
+        this.__canvas.pointerCursor(
+            !!cursorIsPointer,
+            new CustomEvent(cursorIsPointer ? eventOn : eventOff, { detail: cursorIsPointer })
+        );
     }
 
     private mouseInteract(particle: Particle, mouseCoordinates: IMouseStatus["coordinates"]): { enableMove: boolean } {

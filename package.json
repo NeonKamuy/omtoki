@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@types/random-name": "^0.1.0",
+    "random-name": "^0.1.2"
+  }
+}

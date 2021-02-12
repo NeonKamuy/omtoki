@@ -1,4 +1,4 @@
-import { IIndexedUser } from '../../../shared/interfaces/user';
+import { IIndexedUser } from '../../../../shared/interfaces/user';
 import ParticlesCanvas from '../canvas/index';
 import { IMouseStatus } from '../canvas/interfaces';
 import { ICoordinates } from '../interfaces';

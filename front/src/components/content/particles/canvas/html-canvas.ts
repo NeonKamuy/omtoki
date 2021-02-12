@@ -1,3 +1,4 @@
+import { IIndexedUser } from "../../../../shared/interfaces/user";
 import { IMouseStatus } from "./interfaces";
 
 export default class HTMLCanvas {
@@ -33,7 +34,11 @@ export default class HTMLCanvas {
         this.__context.clearRect(0, 0, this.width, this.height);
     }
 
-    public pointerCursor(status: boolean) {
+    public pointerCursor(status: boolean, customEvent?: CustomEvent) {
+        if(customEvent){
+            document.dispatchEvent(customEvent);
+        }
+
         if(status === this.__cursorStatus) return;
         this.__cursorStatus = status;
         this.__container.style.cursor = status ? "pointer" : "default";
