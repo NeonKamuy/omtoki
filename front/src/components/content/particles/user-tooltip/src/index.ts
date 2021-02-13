@@ -83,7 +83,7 @@ export default class Tooltip {
     }
 
     private initTooltipContainer() {
-        document.body.appendChild(this.__container);
+        document.getElementById("root")!.appendChild(this.__container);
         this.__container.style.cssText = `
             display: none;
             position: absolute;
