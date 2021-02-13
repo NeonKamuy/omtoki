@@ -1,3 +1,4 @@
+import HTMLCanvas from "../html-canvas";
 import { IMouseStatus } from "../interfaces";
 
 export default class MouseListener {

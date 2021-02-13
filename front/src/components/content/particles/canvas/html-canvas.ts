@@ -54,6 +54,18 @@ export default class HTMLCanvas {
         setListener && (this.__container.onresize = () => this.resizeCanvas());
     }
 
+    private static hidden = true;
+    private static logDiv = document.createElement("div");
+    public static logToHTML(data: any) {
+        if(this.hidden) {document.body.appendChild(this.logDiv); this.hidden = false;}
+        this.logDiv.innerText = JSON.stringify(data);
+        this.logDiv.style.backgroundColor = "black";
+        this.logDiv.style.color = "white";
+        this.logDiv.style.position = "fixed";
+        this.logDiv.style.top = "0";
+        this.logDiv.style.zIndex = "10000";
+    }
+
     public get width() { return this.__container.offsetWidth; }
     public get height() { return this.__container.offsetHeight; }
     public get context() { return this.__context; }

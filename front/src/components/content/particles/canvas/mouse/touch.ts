@@ -1,4 +1,5 @@
 import { ICoordinates } from "../../interfaces";
+import HTMLCanvas from "../html-canvas";
 
 export default class TouchListener {    
     private readonly __target: HTMLElement;
@@ -13,11 +14,13 @@ export default class TouchListener {
     }
 
     private handleTouch(e: TouchEvent) {
+        HTMLCanvas.logToHTML("Touch Occured");
         const {clientX: x, clientY: y} = e.touches[0];
         this.__touch = {x, y};
     }
 
     private handleTouchEnd(e: TouchEvent) {
+        HTMLCanvas.logToHTML("Touch ended");
         this.__touch = null;
     }
 
