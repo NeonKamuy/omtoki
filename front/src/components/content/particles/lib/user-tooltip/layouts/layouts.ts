@@ -1,4 +1,4 @@
-import Utils from "../../../../../shared/utils";
+import Utils from "../../../../../../shared/utils";
 import Particle from "../../particle";
 import { ITooltipLayouts } from "../src/interfaces";
 

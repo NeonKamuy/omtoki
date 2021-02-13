@@ -1,8 +1,8 @@
-import { IIndexedUser, IUserBase } from "../../../../shared/interfaces/user";
+import { IIndexedUser, IUserBase } from "../../../../../shared/interfaces/user";
 import ParticlesCanvas from "../canvas/index";
 import { IMouseStatus } from "../canvas/interfaces";
-import { ICoordinates } from "../interfaces";
-import { __SETTINGS__ } from "../settings";
+import { ICoordinates } from "../../interfaces";
+import { __SETTINGS__ } from "../../settings";
 import { IArea, ICursor } from "./interfaces";
 
 export default class Particle {
