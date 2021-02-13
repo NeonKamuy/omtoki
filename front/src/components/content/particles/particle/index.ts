@@ -1,13 +1,13 @@
-import { IIndexedUser } from '../../../../shared/interfaces/user';
+import { IIndexedUser, IUserBase } from '../../../../shared/interfaces/user';
 import ParticlesCanvas from '../canvas/index';
 import { IMouseStatus } from '../canvas/interfaces';
 import { ICoordinates } from '../interfaces';
 import { __SETTINGS__ } from '../settings';
 
 export default class Particle {
-    public readonly id = `${Math.random() * 9999}${Date.now()}${Math.random() * 9999}`;
+    public readonly data: IIndexedUser;
     private readonly __canvas: ParticlesCanvas;
-    private readonly __data: any;
+    public readonly id = `${Math.random() * 9999}${Date.now()}${Math.random() * 9999}`;
 
     private __rgbaColor: Record<'r' | 'g' | 'b' | 'a', number>;
     private __coordinates: ICoordinates;
@@ -19,7 +19,7 @@ export default class Particle {
     constructor(args: { canvas: ParticlesCanvas; data: IIndexedUser }) {
         const { canvas, data } = args;
         this.__canvas = canvas;
-        this.__data = data;
+        this.data = data;
         this.__rgbaColor = this.getRandomRGBA();
         this.__coordinates = this.getRandomCoordinates();
         this.__velocity = this.getVelocity();

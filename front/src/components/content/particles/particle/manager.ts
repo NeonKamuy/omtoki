@@ -37,16 +37,16 @@ export default class ParticlesManager {
     }
 
     public prepareNextFrame() {
-        let cursorIsPointer: ICoordinates | false = false;
+        let hoveredParticle: Particle | false = false;
 
         for (let i = 0; i < this.__particles.length; i++) {
             const particle = this.__particles[i];
 
-            const { enableMove } = this.mouseInteract(particle, this.__canvas.mouse.coordinates, !!cursorIsPointer);
+            const { enableMove } = this.mouseInteract(particle, this.__canvas.mouse.coordinates, !!hoveredParticle);
 
             // move the particle
             if (!enableMove) {
-                !cursorIsPointer && (cursorIsPointer = { x: particle.x, y: particle.y });
+                !hoveredParticle && (hoveredParticle = particle);
                 continue;
             }
 
@@ -67,8 +67,8 @@ export default class ParticlesManager {
 
         const { eventOn, eventOff } = __SETTINGS__.TOOLTIP;
         this.__canvas.pointerCursor(
-            !!cursorIsPointer,
-            new CustomEvent(cursorIsPointer ? eventOn : eventOff, { detail: cursorIsPointer })
+            !!hoveredParticle,
+            new CustomEvent(hoveredParticle ? eventOn : eventOff, { detail: hoveredParticle })
         );
     }
 

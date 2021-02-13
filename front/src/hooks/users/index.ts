@@ -7,7 +7,7 @@ export const useUsers = () => {
     const [users, setUsers] = useState([] as IIndexedUser[]);
 
     useEffect(() => {
-        UserController.getAll({ onLoaded: setUsers });
+        UserController.getAll({ data: null, onLoaded: setUsers });
     }, []);
 
     return users;

@@ -1,4 +1,4 @@
-export interface IARequest {
-    data?: any;
+export interface IARequest<T> {
+    data: T;
     onLoaded?: (data: any) => void;
 }
