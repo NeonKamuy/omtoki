@@ -1,10 +1,8 @@
 import Particle from "./index";
 import ParticlesCanvas from "../canvas/index";
 import { __SETTINGS__ } from "../settings";
-import { IParticlesMove } from "./interfaces";
-import { IMouseStatus } from "../canvas/interfaces";
+import { ICursor, IParticlesMove } from "./interfaces";
 import { IIndexedUser } from "../../../../shared/interfaces/user";
-import { ICoordinates } from "../interfaces";
 
 export default class ParticlesManager {
     private static __lastHoveredParticle: Particle["id"] | null = null;
@@ -39,47 +37,33 @@ export default class ParticlesManager {
     }
 
     public prepareNextFrame() {
-        let hoveredParticle: Particle | false = false;
-        const {
-            touch: { touch },
-            mouse: { mouse },
-        } = this.__canvas;
+        let hoveredParticle: Particle | null = null;
+        const { cursor } = this.__canvas;
 
         for (let i = 0; i < this.__particles.length; i++) {
             const particle = this.__particles[i];
 
-            const { enableMove } = this.mouseInteract(
+            // unbubble particle if bubbled in previous frame
+            particle.unbubble();
+
+            const { isHovered } = this.mouseInteract(
                 particle,
-                touch ?? (mouse && mouse["coordinates"]) ?? null,
-                !!hoveredParticle
+                cursor,
+                hoveredParticle
             );
 
-            // move the particle
-            if (!enableMove) {
-                !hoveredParticle && (hoveredParticle = particle);
+            if (!isHovered) {
+                this.moveParticle(particle);
                 continue;
             }
 
-            // If particle out of horisontal bounds, then change direction to opposite
-            if (
-                particle.x + particle.radius >= this.__canvas.width ||
-                particle.x - particle.radius <= 0
-            ) {
-                particle.vx = -particle.vx;
-            }
-
-            // If particle out of vertical bounds, then change direction to opposite
-            if (
-                particle.y + particle.radius >= this.__canvas.height ||
-                particle.y - particle.radius <= 0
-            ) {
-                particle.vy = -particle.vy;
-            }
-
-            const ms = this.__move.speed / 2;
-            particle.x += particle.vx * ms;
-            particle.y += particle.vy * ms;
+            // if some other particle was marked as hovered while preparing this frame
+            // unmark it and move
+            hoveredParticle && this.moveParticle(hoveredParticle);
+            hoveredParticle = particle;
         }
+
+        !!hoveredParticle && hoveredParticle.bubble();
 
         const { eventOn, eventOff } = __SETTINGS__.TOOLTIP;
         this.__canvas.pointerCursor(
@@ -92,13 +76,16 @@ export default class ParticlesManager {
 
     private mouseInteract(
         particle: Particle,
-        mouseCoordinates: ICoordinates | null,
-        otherIsHovered: boolean
-    ): { enableMove: boolean } {
-        const response = { enableMove: true };
-
-        // If cursor is out of bounds or some other particle is hovered, do nothing
-        if (!mouseCoordinates || otherIsHovered) return response;
+        cursor: ICursor | null,
+        otherHovered: Particle | null
+    ): { isHovered: boolean } {
+        // If cursor is out of bounds, do nothing
+        // and set last hovered particle to null,
+        // as no particle is hovered during this frame
+        if (!cursor) {
+            ParticlesManager.__lastHoveredParticle = null;
+            return { isHovered: false };
+        }
 
         // If some particle was hovered during previous frame,
         // then get it and check, if it is hovered again.
@@ -110,29 +97,47 @@ export default class ParticlesManager {
         const last = lastId && this.__particleById[lastId];
 
         if (last) {
-            // If same particle is hovered again, then
-            const lastIsHovered = last.isHovered(mouseCoordinates);
+            // Check if this particle is hovered again, ignoring other particles, marked as hovered during this frame
+            // cause they may come closer to touch center than last hovered particle
+            const lastIsHovered = last.isCursorInteracted(cursor, null);
 
-            // if this particle is not the same, ignore it
+            // if this particle is not the last hovered particle, ignore it
             if (lastIsHovered && particle.id !== lastId) {
-                return response;
+                return { isHovered: false };
             }
-            // else if this particle is the same, don't move it
+            // otherwise, don't move it
             else if (lastIsHovered && particle.id === lastId) {
-                return { enableMove: false };
+                return { isHovered: true };
             }
         }
 
         // Now, if last particle is not hovered again, process new particle below
-        const isHovered = particle.isHovered(mouseCoordinates);
+        const isHovered = particle.isCursorInteracted(cursor, otherHovered);
 
         if (isHovered) ParticlesManager.__lastHoveredParticle = particle.id;
 
-        particle.radius = isHovered
-            ? particle.defaultRadius * 2
-            : particle.defaultRadius;
-        response.enableMove = !isHovered;
+        return { isHovered };
+    }
 
-        return response;
+    private moveParticle(particle: Particle) {
+        // If particle out of horisontal bounds, then change direction to opposite
+        if (
+            particle.x + particle.radius >= this.__canvas.width ||
+            particle.x - particle.radius <= 0
+        ) {
+            particle.vx = -particle.vx;
+        }
+
+        // If particle out of vertical bounds, then change direction to opposite
+        if (
+            particle.y + particle.radius >= this.__canvas.height ||
+            particle.y - particle.radius <= 0
+        ) {
+            particle.vy = -particle.vy;
+        }
+
+        const ms = this.__move.speed / 2;
+        particle.x += particle.vx * ms;
+        particle.y += particle.vy * ms;
     }
 }

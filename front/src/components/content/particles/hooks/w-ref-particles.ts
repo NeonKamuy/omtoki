@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import ParticlesCanvas from "../canvas";
 
-export function useParticlesManager(elements: any[] | null) {
+export function useParticles(elements: any[] | null) {
     const containerRef = useRef(null);
     const [canvas, setCanvas] = useState<ParticlesCanvas | null>(containerRef.current)
 

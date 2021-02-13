@@ -13,7 +13,7 @@ export function useTooltip() {
     const [tooltip, setTooltip] = useState<Tooltip | null>(tooltipRef.current);
     tooltipRef.current = tooltip;
 
-    const setContainerRef = useCallback((node: HTMLElement) => {
+    const setContainerRef = useCallback((node: HTMLElement | null) => {
         if (!node) return;
         setTooltip(new Tooltip(node));
     }, []);

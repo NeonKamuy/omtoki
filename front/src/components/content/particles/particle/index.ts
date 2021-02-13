@@ -3,7 +3,7 @@ import ParticlesCanvas from "../canvas/index";
 import { IMouseStatus } from "../canvas/interfaces";
 import { ICoordinates } from "../interfaces";
 import { __SETTINGS__ } from "../settings";
-import { IArea } from "./interfaces";
+import { IArea, ICursor } from "./interfaces";
 
 export default class Particle {
     public readonly data: IIndexedUser;
@@ -28,7 +28,22 @@ export default class Particle {
         this.__velocity = this.getVelocity();
     }
 
-    public isTouched(touch: IMouseStatus["coordinates"]): boolean {
+    /**
+     * @param otherHovered Only required when mouse mode is touch, as hovered particle is chosen within touch radius  
+     * If other particle was marked as hovered while processing current frame,
+     * and it is closer to touch coordinates than this particle, this particle shall not be marked as hovered
+     */
+    public isCursorInteracted(
+        cursor: ICursor,
+        otherHovered: Particle | null
+    ): boolean {
+        const { mode, coordinates } = cursor;
+        return mode === "mouse"
+            ? this.isHovered(coordinates)
+            : this.isTouched(coordinates, otherHovered);
+    }
+
+    public isTouched(touch: IMouseStatus["coordinates"], otherHovered: Particle | null): boolean {
         if (!touch) return false;
 
         const radius = __SETTINGS__.TOUCH_RADIUS;
@@ -63,6 +78,14 @@ export default class Particle {
         this.__canvas.context.closePath();
 
         this.__canvas.context.fill();
+    }
+
+    public bubble() {
+        this.radius = this.defaultRadius * 2;
+    }
+
+    public unbubble() {
+        this.radius = this.defaultRadius;
     }
 
     private overlapsArea(coordinates: ICoordinates, area: IArea): boolean {
