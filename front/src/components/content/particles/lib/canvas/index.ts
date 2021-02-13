@@ -1,6 +1,6 @@
-import { IIndexedUser } from "../../../../shared/interfaces/user";
+import { IIndexedUser } from "../../../../../shared/interfaces/user";
 import ParticlesManager from "../particle/manager";
-import { __SETTINGS__ } from "../settings";
+import { __SETTINGS__ } from "../../settings";
 import HTMLCanvas from "./html-canvas";
 
 export default class ParticlesCanvas extends HTMLCanvas {

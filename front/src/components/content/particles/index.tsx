@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { IIndexedUser } from "../../../shared/interfaces/user";
-import { useParticles } from "./hooks/w-ref-particles";
+import { useParticles } from "./lib/hooks/w-ref-particles";
 import { __SETTINGS__ } from "./settings";
-import { useUserTooltip } from "./user-tooltip/hooks/user-tooltip";
+import { useUserTooltip } from "./lib/user-tooltip/hooks/user-tooltip";
 
 export const ParticleContainer = React.memo(
     (props: { elements: IIndexedUser[] }) => {

@@ -1,28 +1,30 @@
 import { ICursorMode } from "../particle/interfaces";
-import HTMLCanvas from "./html-canvas";
 import { IMouseStatus } from "./interfaces";
+import { isMobile } from "react-device-detect";
 
 export default class CursorListener {
     private readonly __target: HTMLElement;
+    private __cursorMode: ICursorMode;
     private __openingTouch = false;
 
-    private __cursorMode: ICursorMode = "mouse";
     private __status: IMouseStatus | null = null;
 
     constructor(targetElement: HTMLElement) {
         this.__target = targetElement;
 
-        this.__target.onmousemove = (e) => this.handleMouseMove(e);
-        this.__target.onmousedown = (e) => this.handleMouseDown(e);
-        this.__target.onmouseup = (e) => this.handleMouseUp(e);
-        this.__target.onmouseleave = (e) => this.handleMouseLeave(e);
-
-        this.__target.ontouchstart = (e) => this.handleTouch(e);
+        if (isMobile) {
+            this.__cursorMode = "touch";
+            this.__target.ontouchstart = (e) => this.handleTouch(e);
+        } else {
+            this.__cursorMode = "mouse";
+            this.__target.onmousemove = (e) => this.handleMouseMove(e);
+            this.__target.onmousedown = (e) => this.handleMouseDown(e);
+            this.__target.onmouseup = (e) => this.handleMouseUp(e);
+            this.__target.onmouseleave = (e) => this.handleMouseLeave(e);
+        }
     }
 
     private handleTouch(e: TouchEvent) {
-        this.__cursorMode = "touch";
-
         if (!this.__openingTouch) {
             this.__openingTouch = true;
             const { clientX: x, clientY: y } = e.touches[0];
@@ -34,8 +36,6 @@ export default class CursorListener {
     }
 
     private handleMouseMove(e: MouseEvent) {
-        if (this.__cursorMode !== "mouse") return;
-
         const { offsetX: x, offsetY: y } = e;
         this.__status = {
             isMouseDown: false,
@@ -44,17 +44,16 @@ export default class CursorListener {
     }
 
     private handleMouseDown(e: MouseEvent) {
-        if (!this.__status || this.__cursorMode !== "mouse") return;
+        if (!this.__status) return;
         this.__status.isMouseDown = true;
     }
 
     private handleMouseUp(e: MouseEvent) {
-        if (!this.__status || this.__cursorMode !== "mouse") return;
+        if (!this.__status) return;
         this.__status.isMouseDown = false;
     }
 
     private handleMouseLeave(e: MouseEvent) {
-        if(this.__cursorMode !== "mouse") return;
         this.__status = null;
     }
 
@@ -63,6 +62,6 @@ export default class CursorListener {
     }
 
     public get mode(): ICursorMode {
-        return this.__cursorMode ? "touch" : "mouse";
+        return this.__cursorMode;
     }
 }

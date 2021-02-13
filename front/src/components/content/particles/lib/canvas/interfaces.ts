@@ -1,4 +1,4 @@
-import { ICoordinates } from "../interfaces";
+import { ICoordinates } from "../../interfaces";
 
 export interface IMouseStatus {
     coordinates: ICoordinates;
