@@ -6,7 +6,7 @@ export interface IAAppearTooltip {
 
 export interface IAAltLayout extends IAAppearTooltip {
     key: keyof ITooltipLayouts;
-    container: HTMLDivElement;
+    container: HTMLElement;
     boundExcessions: IBoundExcessions;
 }
 /************************/

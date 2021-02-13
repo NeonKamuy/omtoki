@@ -2,11 +2,11 @@ import { IAAppearTooltip, IBoundExcessions, IExcessionDirections, ITooltipLayout
 import TooltipLayoutManager from "./layout-manager";
 
 export default class Tooltip {
-    private readonly __container: HTMLDivElement;
+    private readonly __container: HTMLElement;
 
-    constructor() {
+    constructor(parentContainer: HTMLElement) {
         this.__container = document.createElement("div");
-        this.initTooltipContainer();
+        this.initTooltipContainer(parentContainer);
     }
 
     public disappear() {
@@ -82,8 +82,8 @@ export default class Tooltip {
         return excessions;
     }
 
-    private initTooltipContainer() {
-        document.getElementById("root")!.appendChild(this.__container);
+    private initTooltipContainer(parentContainer: HTMLElement) {
+       parentContainer.appendChild(this.__container);
         this.__container.style.cssText = `
             display: none;
             position: absolute;

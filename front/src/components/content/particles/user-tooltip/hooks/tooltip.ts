@@ -1,9 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, {
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from "react";
 import Tooltip from "../src";
 import { IAAppearTooltip } from "../src/interfaces";
 
 export function useTooltip() {
-    const [tooltip, setTooltip] = useState<Tooltip | null>(null);
+    const tooltipRef = useRef<Tooltip | null>(null);
+    const [tooltip, setTooltip] = useState<Tooltip | null>(tooltipRef.current);
+    tooltipRef.current = tooltip;
+
+    const setContainerRef = useCallback((node: HTMLElement) => {
+        if (!node) return;
+        setTooltip(new Tooltip(node));
+    }, []);
 
     const response = useMemo(() => {
         if (!tooltip)
@@ -18,11 +31,7 @@ export function useTooltip() {
         };
     }, [tooltip]);
 
-    useEffect(() => {
-        setTooltip(new Tooltip());
-    }, [setTooltip]);
-
-    return response;
+    return { setContainerRef, ...response };
 }
 
 const emptyFunc = () => {};
