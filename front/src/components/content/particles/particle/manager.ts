@@ -42,7 +42,7 @@ export default class ParticlesManager {
 
         for (let i = 0; i < this.__particles.length; i++) {
             const particle = this.__particles[i];
-
+            
             // unbubble particle if bubbled in previous frame
             particle.unbubble();
 
@@ -63,7 +63,12 @@ export default class ParticlesManager {
             hoveredParticle = particle;
         }
 
-        !!hoveredParticle && hoveredParticle.bubble();
+        if(hoveredParticle){
+            hoveredParticle.bubble();
+            ParticlesManager.__lastHoveredParticle = hoveredParticle.id;
+        } else {
+            ParticlesManager.__lastHoveredParticle = null;
+        }       
 
         const { eventOn, eventOff } = __SETTINGS__.TOOLTIP;
         this.__canvas.pointerCursor(
@@ -80,10 +85,7 @@ export default class ParticlesManager {
         otherHovered: Particle | null
     ): { isHovered: boolean } {
         // If cursor is out of bounds, do nothing
-        // and set last hovered particle to null,
-        // as no particle is hovered during this frame
         if (!cursor) {
-            ParticlesManager.__lastHoveredParticle = null;
             return { isHovered: false };
         }
 
@@ -113,8 +115,6 @@ export default class ParticlesManager {
 
         // Now, if last particle is not hovered again, process new particle below
         const isHovered = particle.isCursorInteracted(cursor, otherHovered);
-
-        if (isHovered) ParticlesManager.__lastHoveredParticle = particle.id;
 
         return { isHovered };
     }

@@ -29,7 +29,7 @@ export default class Particle {
     }
 
     /**
-     * @param otherHovered Only required when mouse mode is touch, as hovered particle is chosen within touch radius  
+     * @param otherHovered Only required when mouse mode is touch, as hovered particle is chosen within touch radius
      * If other particle was marked as hovered while processing current frame,
      * and it is closer to touch coordinates than this particle, this particle shall not be marked as hovered
      */
@@ -38,19 +38,41 @@ export default class Particle {
         otherHovered: Particle | null
     ): boolean {
         const { mode, coordinates } = cursor;
+
         return mode === "mouse"
             ? this.isHovered(coordinates)
             : this.isTouched(coordinates, otherHovered);
     }
 
-    public isTouched(touch: IMouseStatus["coordinates"], otherHovered: Particle | null): boolean {
+    public isTouched(
+        touch: IMouseStatus["coordinates"],
+        otherHovered: Particle | null
+    ): boolean {
         if (!touch) return false;
 
         const radius = __SETTINGS__.TOUCH_RADIUS;
         const touchArea = this.getArea(touch, radius);
         const particleCoordinates = { x: this.x, y: this.y };
+        let overlap = this.overlapsArea(particleCoordinates, touchArea);
 
-        return this.overlapsArea(particleCoordinates, touchArea);
+        if (overlap && otherHovered) {
+            const { x: thisX, y: thisY } = this.getCoordinateDelta(
+                this.coordinates,
+                touch
+            );
+            const thisDistance = Math.sqrt(Math.pow(thisX, 2) + Math.pow(thisY, 2));
+
+            const { x: otherX, y: otherY } = this.getCoordinateDelta(
+                otherHovered.coordinates,
+                touch
+            );
+            const otherDistance = Math.sqrt(Math.pow(otherX, 2) + Math.pow(otherY, 2));
+
+
+            if(thisDistance > otherDistance) overlap = false;
+        }
+
+        return overlap;
     }
 
     public isHovered(mouse: IMouseStatus["coordinates"]): boolean {
@@ -58,7 +80,9 @@ export default class Particle {
 
         const particleCoordinates = { x: this.x, y: this.y };
         const particleArea = this.getArea(particleCoordinates, this.radius);
-        return this.overlapsArea(mouse, particleArea);
+        const overlap = this.overlapsArea(mouse, particleArea);
+
+        return overlap;
     }
 
     public draw(): void {
@@ -106,6 +130,16 @@ export default class Particle {
         return { minX, minY, maxX, maxY };
     }
 
+    private getCoordinateDelta(
+        coord1: ICoordinates,
+        coord2: ICoordinates
+    ): ICoordinates {
+        return {
+            x: Math.abs(coord1.x - coord2.x),
+            y: Math.abs(coord1.y - coord2.y),
+        };
+    }
+
     private getRandomCoordinates(): ICoordinates {
         const x = Math.random() * this.__canvas.width;
         const y = Math.random() * this.__canvas.height;
@@ -145,6 +179,9 @@ export default class Particle {
         return { x, y };
     }
 
+    public get coordinates() {
+        return this.__coordinates;
+    }
     public get x() {
         return this.__coordinates.x;
     }
