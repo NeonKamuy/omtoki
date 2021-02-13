@@ -24,7 +24,7 @@ export function useUserTooltip() {
         };
 
         const eventOffListener = () => {
-            // hide();
+            hide();
         };
 
         document.addEventListener(__SETTINGS__.TOOLTIP.eventOn, eventOnListener);
