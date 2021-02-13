@@ -20,8 +20,6 @@ export default class MouseListener {
             isMouseDown: false,
             coordinates: { x, y },
         };
-
-        console.log("Coordinates: ", x, y);
     }
 
     private handleMouseDown(e: MouseEvent) {

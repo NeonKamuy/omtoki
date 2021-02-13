@@ -6,7 +6,6 @@ import Requests from "../requests";
 
 export default class UserController {
     public static getAll(args: IARequest<null>) {
-        console.log(axios);
         axios.get(`${__CONFIG__.backendURL}/users/`).then(res => Requests.handleResponse({ response: res, cb: args.onLoaded }));
     }
 

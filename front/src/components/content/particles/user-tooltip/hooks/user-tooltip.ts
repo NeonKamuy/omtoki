@@ -22,7 +22,7 @@ export function useUserTooltip() {
 
     const eventOnListener = (event: any) => {
       const { detail: particle } = event as CustomEvent<Particle>;
-
+      
       show({
         coordinates: { left: particle.x, top: particle.y },
         layouts: UserTooltipLayouts.get(particle),

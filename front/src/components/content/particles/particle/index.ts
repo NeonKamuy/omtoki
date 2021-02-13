@@ -1,16 +1,18 @@
-import { IIndexedUser, IUserBase } from '../../../../shared/interfaces/user';
-import ParticlesCanvas from '../canvas/index';
-import { IMouseStatus } from '../canvas/interfaces';
-import { ICoordinates } from '../interfaces';
-import { __SETTINGS__ } from '../settings';
-import { IArea } from './interfaces';
+import { IIndexedUser, IUserBase } from "../../../../shared/interfaces/user";
+import ParticlesCanvas from "../canvas/index";
+import { IMouseStatus } from "../canvas/interfaces";
+import { ICoordinates } from "../interfaces";
+import { __SETTINGS__ } from "../settings";
+import { IArea } from "./interfaces";
 
 export default class Particle {
     public readonly data: IIndexedUser;
     private readonly __canvas: ParticlesCanvas;
-    public readonly id = `${Math.random() * 9999}${Date.now()}${Math.random() * 9999}`;
+    public readonly id = `${Math.random() * 9999}${Date.now()}${
+        Math.random() * 9999
+    }`;
 
-    private __rgbaColor: Record<'r' | 'g' | 'b' | 'a', number>;
+    private __rgbaColor: Record<"r" | "g" | "b" | "a", number>;
     private __coordinates: ICoordinates;
     private __velocity: ICoordinates;
 
@@ -27,20 +29,21 @@ export default class Particle {
     }
 
     public isTouched(touch: IMouseStatus["coordinates"]): boolean {
-        if(!touch) return false;
+        if (!touch) return false;
 
         const radius = __SETTINGS__.TOUCH_RADIUS;
-        const area = this.getArea(touch, radius);
+        const touchArea = this.getArea(touch, radius);
+        const particleCoordinates = { x: this.x, y: this.y };
 
-        return this.overlapsArea(touch, area)
+        return this.overlapsArea(particleCoordinates, touchArea);
     }
 
     public isHovered(mouse: IMouseStatus["coordinates"]): boolean {
-        if(!mouse) return false;
+        if (!mouse) return false;
 
-        const area = this.getArea(mouse, this.radius);
-        console.log("Area", area);
-        return this.overlapsArea(mouse,area);
+        const particleCoordinates = { x: this.x, y: this.y };
+        const particleArea = this.getArea(particleCoordinates, this.radius);
+        return this.overlapsArea(mouse, particleArea);
     }
 
     public draw(): void {
@@ -63,27 +66,27 @@ export default class Particle {
     }
 
     private overlapsArea(coordinates: ICoordinates, area: IArea): boolean {
-        const {x, y} = coordinates;
-        const {minX, minY, maxX, maxY} = area;
+        const { x, y } = coordinates;
+        const { minX, minY, maxX, maxY } = area;
 
         return x > minX && y > minY && x < maxX && y < maxY;
     }
 
     private getArea(coordinates: ICoordinates, radius: number): IArea {
-        const {x, y} = coordinates;
+        const { x, y } = coordinates;
 
         const minX = x - radius;
         const maxX = x + radius;
         const minY = y - radius;
         const maxY = y + radius;
 
-        return {minX, minY, maxX, maxY}
+        return { minX, minY, maxX, maxY };
     }
 
     private getRandomCoordinates(): ICoordinates {
         const x = Math.random() * this.__canvas.width;
         const y = Math.random() * this.__canvas.height;
-        return {x, y}
+        return { x, y };
     }
 
     private getRandomRGBA() {
@@ -97,8 +100,10 @@ export default class Particle {
 
     private getVelocity(): ICoordinates {
         const move = __SETTINGS__.PARTICLE.MOVE;
-        const vBaseByDirection = __SETTINGS__.PARTICLE.BASE_VELOCITY_BY_DIRECTION;
-        const vBase = vBaseByDirection[move.direction]  ?? vBaseByDirection['none'];
+        const vBaseByDirection =
+            __SETTINGS__.PARTICLE.BASE_VELOCITY_BY_DIRECTION;
+        const vBase =
+            vBaseByDirection[move.direction] ?? vBaseByDirection["none"];
 
         let x: number, y: number;
         if (move.straight) {
@@ -114,16 +119,31 @@ export default class Particle {
             y = vBase.y + Math.random() - 0.5;
         }
 
-        return {x, y}
+        return { x, y };
     }
 
-
-    public get x() { return this.__coordinates.x; }
-    public set x(x) { this.__coordinates.x = x; }
-    public get y() { return this.__coordinates.y; }
-    public set y(y) { this.__coordinates.y = y; }
-    public get vx() { return this.__velocity.x; }
-    public set vx(vx) { this.__velocity.x = vx; }
-    public get vy() { return this.__velocity.y; }
-    public set vy(vy) { this.__velocity.y = vy; }
+    public get x() {
+        return this.__coordinates.x;
+    }
+    public set x(x) {
+        this.__coordinates.x = x;
+    }
+    public get y() {
+        return this.__coordinates.y;
+    }
+    public set y(y) {
+        this.__coordinates.y = y;
+    }
+    public get vx() {
+        return this.__velocity.x;
+    }
+    public set vx(vx) {
+        this.__velocity.x = vx;
+    }
+    public get vy() {
+        return this.__velocity.y;
+    }
+    public set vy(vy) {
+        this.__velocity.y = vy;
+    }
 }
