@@ -3,6 +3,7 @@ import ParticlesCanvas from '../canvas/index';
 import { IMouseStatus } from '../canvas/interfaces';
 import { ICoordinates } from '../interfaces';
 import { __SETTINGS__ } from '../settings';
+import { IArea } from './interfaces';
 
 export default class Particle {
     public readonly data: IIndexedUser;
@@ -25,16 +26,21 @@ export default class Particle {
         this.__velocity = this.getVelocity();
     }
 
+    public isTouched(touch: IMouseStatus["coordinates"]): boolean {
+        if(!touch) return false;
+
+        const radius = __SETTINGS__.TOUCH_RADIUS;
+        const area = this.getArea(touch, radius);
+
+        return this.overlapsArea(touch, area)
+    }
+
     public isHovered(mouse: IMouseStatus["coordinates"]): boolean {
         if(!mouse) return false;
 
-        const {x, y} = mouse;
-        const minX = this.x - this.radius;
-        const minY = this.y - this.radius;
-        const maxX = this.x + this.radius;
-        const maxY = this.y + this.radius;
-
-        return x > minX && y > minY && x < maxX && y < maxY;
+        const area = this.getArea(mouse, this.radius);
+        console.log("Area", area);
+        return this.overlapsArea(mouse,area);
     }
 
     public draw(): void {
@@ -54,6 +60,24 @@ export default class Particle {
         this.__canvas.context.closePath();
 
         this.__canvas.context.fill();
+    }
+
+    private overlapsArea(coordinates: ICoordinates, area: IArea): boolean {
+        const {x, y} = coordinates;
+        const {minX, minY, maxX, maxY} = area;
+
+        return x > minX && y > minY && x < maxX && y < maxY;
+    }
+
+    private getArea(coordinates: ICoordinates, radius: number): IArea {
+        const {x, y} = coordinates;
+
+        const minX = x - radius;
+        const maxX = x + radius;
+        const minY = y - radius;
+        const maxY = y + radius;
+
+        return {minX, minY, maxX, maxY}
     }
 
     private getRandomCoordinates(): ICoordinates {

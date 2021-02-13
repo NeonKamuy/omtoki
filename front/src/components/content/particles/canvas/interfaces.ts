@@ -1,6 +1,6 @@
 import { ICoordinates } from "../interfaces";
 
 export interface IMouseStatus {
-    coordinates: ICoordinates | null;      // if null, mouse isn't inside area
+    coordinates: ICoordinates;
     isMouseDown: boolean;
 }
