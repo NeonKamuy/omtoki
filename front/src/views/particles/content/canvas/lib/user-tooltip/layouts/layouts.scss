@@ -3,15 +3,15 @@
         display: flex;
         padding: 5px;
         margin: 10px;
-        height: 150px;
-        max-height: 400px;
+        height: 100%;
+        max-height: 300px;
         width: 300px;
         color: white;
         font-size: 1em;
         background-color: transparent;
     }
 
-    &.user-tooltip-left-column {
+    .user-tooltip-left-column {
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -28,8 +28,8 @@
                 border-radius: 50%;
                 background-repeat: no-repeat;
                 background-size: cover;
-                width: 60%;
-                height: 60%;
+                width: 60px;
+                height: 60px;
                 margin: auto;
             }
         }
@@ -44,7 +44,7 @@
             &::after {
                 position: absolute;
                 content: "";
-                height: 100%;
+                height: 50px;
                 width: 20%;
                 top: 0%;
                 left: 80%;
@@ -56,7 +56,7 @@
         }
     }
 
-    &.user-tooltip-right-column {
+    .user-tooltip-right-column {
         display: flex;
         flex-direction: column;
         width: 70%;
@@ -64,7 +64,7 @@
         .user-tooltip-right-top-row {
             display: flex;
             flex-direction: row;
-            padding: 10px 15px 10px 15px;
+            padding: 5px 15px 0px 15px;
             height: 80px;
             background-color: #f5337e;
             border-radius: 0 12px 0 0;
@@ -76,7 +76,15 @@
             background-color: #f5337e;
             border-radius: 0 0 20px 20px;
             min-height: 80px;
-            padding: 10px 15px 10px 15px;
+            padding: 5px 15px 10px 15px;
         }
+    }
+
+    .user-tooltip-text-content {
+        max-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-word;
     }
 }

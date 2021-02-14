@@ -1,4 +1,5 @@
 import Utils from "../../../../../../../shared/utils";
+import { __SETTINGS__ } from "../../../settings";
 import Particle from "../../particle";
 import { ITooltipLayouts } from "../src/interfaces";
 
@@ -21,25 +22,29 @@ export class UserTooltipLayouts {
         return `
             <div class="user-tooltip-layout-default user-tooltip-container">
 
-                <div class="user-tooltip-layout-default user-tooltip-left-column">
+                <div class="user-tooltip-left-column">
                 
-                    <div class="user-tooltip-layout-default user-tooltip-left-top-row">
-                        <div class="user-tooltip-layout-default user-tooltip-picture"></div>
+                    <div class="user-tooltip-left-top-row">
+                        <div class="user-tooltip-picture"></div>
                     </div>
                 
-                    <div class="user-tooltip-layout-default user-tooltip-left-bottom-row">
+                    <div class="user-tooltip-left-bottom-row">
                     </div>
                 
                 </div>
 
 
-                <div class="user-tooltip-layout-default user-tooltip-right-column">
-                    <div class="user-tooltip-layout-default user-tooltip-right-top-row">
-                        ${this.prepareStr(particle.data.name, 24)}
+                <div class="user-tooltip-right-column">
+                    <div class="user-tooltip-right-top-row">
+                        <span class="user-tooltip-text-content">
+                        ${this.prepareStr(particle.data.name, __SETTINGS__.MAX_USER_TOOLTIP_NAME)}
+                        </span>
                     </div>
 
-                    <div class="user-tooltip-layout-default user-tooltip-right-bottom-row">
-                            ${this.prepareStr(particle.data.description, 45)}
+                    <div class="user-tooltip-right-bottom-row">
+                        <span class="user-tooltip-text-content">
+                            ${this.prepareStr(particle.data.description, __SETTINGS__.MAX_USER_TOOLTIP_DESC)}
+                        </span>
                     </div>
                 </div>
 

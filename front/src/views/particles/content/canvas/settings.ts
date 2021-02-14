@@ -4,6 +4,8 @@ export const __SETTINGS__ = {
     MAX_FPS: 20,
     TOUCH_RADIUS: 40,
     HOVER_RADIUS: 20,
+    MAX_USER_TOOLTIP_NAME: 24,
+    MAX_USER_TOOLTIP_DESC: 85,
     PARTICLE: {
         RADIUS: 2.5,
         REACT_ON_HOVER: true,
