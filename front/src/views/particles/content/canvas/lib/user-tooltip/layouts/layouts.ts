@@ -39,7 +39,7 @@ export class UserTooltipLayouts {
                     </div>
 
                     <div class="user-tooltip-layout-default user-tooltip-right-bottom-row">
-                            ${this.prepareStr(particle.data.description, 24)}
+                            ${this.prepareStr(particle.data.description, 45)}
                     </div>
                 </div>
 

@@ -1,3 +1,4 @@
+import Utils from "../../../../../../../shared/utils";
 import { IAAppearTooltip, IBoundExcessions, IExcessionDirections, ITooltipLayouts } from "./interfaces";
 import TooltipLayoutManager from "./layout-manager";
 
@@ -44,7 +45,7 @@ export default class Tooltip {
         const boundExcessions = this.exceedsBounds();
         const { yAxis, xAxis } = this.getExcessionDirections(boundExcessions);
 
-        const key = ((xAxis ?? "") + (xAxis ? this.capitalize(yAxis ?? "") : yAxis)) as keyof ITooltipLayouts;
+        const key = ((xAxis ?? "") + (xAxis ? Utils.capitalize(yAxis ?? "") : yAxis)) as keyof ITooltipLayouts;
         let layout = layouts[key.length ? key : "default"];
 
         return { key, layout: layout ?? null, boundExcessions };
@@ -90,10 +91,5 @@ export default class Tooltip {
             z-index: 1000;
             width: max-content;
         `;
-    }
-
-    private capitalize(s: string): string {
-        if (!s.length) return s;
-        return s.charAt(0).toUpperCase() + s.slice(1);
     }
 }

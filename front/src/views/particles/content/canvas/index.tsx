@@ -15,7 +15,7 @@ export const ParticleContainer = React.memo(
         const [setParticlesContainerRef, handleElementsChange] = useParticles(
             new Array(1000).fill({
                 name: "Магумамбед Вальфрендович",
-                description: "Senior Java разработчик",
+                description: "Senior Java разработчик да и в целом очень умный хрен",
             })
         );
 
