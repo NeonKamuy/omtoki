@@ -1,0 +1,17 @@
+#account-modal-trigger {
+    font-size: 18px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#account-button-container {
+    position: absolute;
+    right: 30%;
+    top: 50%;
+    width: 300px;
+    font-family: "cera-pro";
+
+    @media(max-width: 1400px){
+        right: 15%;   
+    }
+}

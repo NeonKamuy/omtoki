@@ -1,4 +1,4 @@
-import { IIndexedUser, IUserBase } from "../../../../../shared/interfaces/user";
+import { IIndexedUser, IUserBase } from "../../../../../../shared/interfaces/user";
 import ParticlesCanvas from "../canvas/index";
 import { IMouseStatus } from "../canvas/interfaces";
 import { ICoordinates } from "../../interfaces";
@@ -29,8 +29,7 @@ export default class Particle {
     }
 
     /**
-     * @param otherHovered Only required when mouse mode is touch, as hovered particle is chosen within touch radius
-     * If other particle was marked as hovered while processing current frame,
+     * @param otherHovered If other particle was marked as hovered while processing current frame,
      * and it is closer to touch coordinates than this particle, this particle shall not be marked as hovered
      */
     public isCursorInteracted(
@@ -38,49 +37,28 @@ export default class Particle {
         otherHovered: Particle | null
     ): boolean {
         const { mode, coordinates } = cursor;
+        const radius = mode === "mouse" ? __SETTINGS__.HOVER_RADIUS : __SETTINGS__.TOUCH_RADIUS;
 
-        return mode === "mouse"
-            ? this.isHovered(coordinates)
-            : this.isTouched(coordinates, otherHovered);
-    }
-
-    public isTouched(
-        touch: IMouseStatus["coordinates"],
-        otherHovered: Particle | null
-    ): boolean {
-        if (!touch) return false;
-
-        const radius = __SETTINGS__.TOUCH_RADIUS;
-        const touchArea = this.getArea(touch, radius);
+        const interactArea = this.getArea(coordinates, radius);
         const particleCoordinates = { x: this.x, y: this.y };
-        let overlap = this.overlapsArea(particleCoordinates, touchArea);
+        let overlap = this.overlapsArea(particleCoordinates, interactArea);
 
         if (overlap && otherHovered) {
             const { x: thisX, y: thisY } = this.getCoordinateDelta(
                 this.coordinates,
-                touch
+                coordinates
             );
             const thisDistance = Math.sqrt(Math.pow(thisX, 2) + Math.pow(thisY, 2));
 
             const { x: otherX, y: otherY } = this.getCoordinateDelta(
                 otherHovered.coordinates,
-                touch
+                coordinates
             );
             const otherDistance = Math.sqrt(Math.pow(otherX, 2) + Math.pow(otherY, 2));
 
 
             if(thisDistance > otherDistance) overlap = false;
         }
-
-        return overlap;
-    }
-
-    public isHovered(mouse: IMouseStatus["coordinates"]): boolean {
-        if (!mouse) return false;
-
-        const particleCoordinates = { x: this.x, y: this.y };
-        const particleArea = this.getArea(particleCoordinates, this.radius);
-        const overlap = this.overlapsArea(mouse, particleArea);
 
         return overlap;
     }

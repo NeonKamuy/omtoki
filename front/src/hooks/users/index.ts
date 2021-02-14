@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import UserController from "../../controllers/users";
 import { IIndexedUser } from "../../shared/interfaces/user";
 

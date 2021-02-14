@@ -3,6 +3,7 @@ import { ICoordinates } from "./interfaces";
 export const __SETTINGS__ = {
     MAX_FPS: 20,
     TOUCH_RADIUS: 40,
+    HOVER_RADIUS: 10,
     PARTICLE: {
         RADIUS: 2.5,
         REACT_ON_HOVER: true,

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { __CONFIG__ } from "../../config";
-import { IIndexedUser, IUserBase } from "../../shared/interfaces/user";
+import { IUserBase } from "../../shared/interfaces/user";
 import { IARequest } from "../interfaces";
 import Requests from "../requests";
 

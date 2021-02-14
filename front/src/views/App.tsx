@@ -1,12 +1,10 @@
 import React from "react";
-import { Content } from "../content";
-import { Header } from "../header";
+import { ParticlesView } from "./particles";
 
 const App = () => {
     return (
         <div style={{height: "100%"}}>
-            <Header />
-            <Content />
+            <ParticlesView />
         </div>
     );
 };

@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { Modal, Form, Button, ListGroup } from "react-bootstrap";
-import { IProps } from "./interfaces";
 import "./styles/modal.scss";
 import { BurgerButton } from "./burger-button";
+import { ModalContext } from "../../context/modal-context";
 
-export const BurgerModalButton: React.FC<IProps> = (props) => {
-    const { isOpen, toggleIsOpen } = props;
+export const BurgerModalButton: React.FC<{}> = React.memo(() => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const modalContext = useContext(ModalContext);
+    const modalContextRef = useRef(modalContext);
+    modalContextRef.current = modalContext;
+
+    const toggleIsOpen = useCallback(() => {
+        setIsOpen((burgerIsOpen: boolean | undefined) => {
+            const { modalOpen, setModalOpen } = modalContextRef.current;
+
+            if (!!burgerIsOpen) {
+                setModalOpen(false);
+                return false;
+            }
+
+            if (modalOpen) return !!burgerIsOpen;
+            setModalOpen(true);
+            return true;
+        });
+    }, [setIsOpen]);
 
     return (
         <>
@@ -39,4 +58,4 @@ export const BurgerModalButton: React.FC<IProps> = (props) => {
             </Modal>
         </>
     );
-};
+});

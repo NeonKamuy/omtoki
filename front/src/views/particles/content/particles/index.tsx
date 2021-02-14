@@ -1,13 +1,16 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { IIndexedUser } from "../../../shared/interfaces/user";
+import { IIndexedUser } from "../../../../shared/interfaces/user";
 import { useParticles } from "./lib/hooks/w-ref-particles";
 import { __SETTINGS__ } from "./settings";
 import { useUserTooltip } from "./lib/user-tooltip/hooks/user-tooltip";
 import "./lib/user-tooltip/layouts/layouts.scss";
+import { AccountButtonContainer } from "../add-account/button-container";
 
 export const ParticleContainer = React.memo(
     (props: { elements: IIndexedUser[] }) => {
+        const { elements } = props;
+
         const [setUserTooltipContainerRef] = useUserTooltip();
         const [setParticlesContainerRef, handleElementsChange] = useParticles(
             new Array(1000).fill({
@@ -16,7 +19,6 @@ export const ParticleContainer = React.memo(
             })
         );
 
-        const { elements } = props;
         useEffect(() => {
             handleElementsChange(elements);
         }, [elements]);
@@ -31,6 +33,7 @@ export const ParticleContainer = React.memo(
                 }}
                 ref={setParticlesContainerRef}
             >
+                <AccountButtonContainer />
                 <div ref={setUserTooltipContainerRef} />
             </div>
         );

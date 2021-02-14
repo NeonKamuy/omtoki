@@ -2,7 +2,7 @@ import Particle from "./index";
 import ParticlesCanvas from "../canvas/index";
 import { __SETTINGS__ } from "../../settings";
 import { ICursor, IParticlesMove } from "./interfaces";
-import { IIndexedUser } from "../../../../../shared/interfaces/user";
+import { IIndexedUser } from "../../../../../../shared/interfaces/user";
 
 export default class ParticlesManager {
     private static __lastHoveredParticle: Particle["id"] | null = null;
