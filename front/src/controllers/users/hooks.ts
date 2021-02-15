@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import UserController from "../../controllers/users";
+import UserController from ".";
 import { IIndexedUser } from "../../shared/interfaces/user";
 
 // Get All Users

@@ -1,11 +1,14 @@
 .user-tooltip-layout-default {
+    --color: white;
+    --background-color: white;
+
     &.user-tooltip-container {
         display: flex;
         margin: 15px;
         height: 100%;
         max-height: 300px;
         width: 272px;
-        color: white;
+        color: var(--color);
         font-size: 1em;
         font-family: "cera-pro";
         background-color: transparent;
@@ -23,7 +26,7 @@
             flex-direction: row;
             height: 80px;
             border-radius: 20px 0 0 20px;
-            background-color: #f5337e;
+            background-color: var(--background-color);
 
 
             .user-tooltip-picture {
@@ -53,7 +56,8 @@
                 top: 0%;
                 left: 80%;
                 border-top-right-radius: 25px;
-                background-color: #f5337e;
+                background-color: transparent;
+                box-shadow: 5px -15px 0 0 var(--background-color);
                 z-index: 1052;
             }
         }
@@ -70,14 +74,14 @@
             align-items: center;
             padding: 5px 15px 0px 5px;
             height: 80px;
-            background-color: #f5337e;
+            background-color: var(--background-color);
             border-radius: 0 12px 0 0;
         }
 
         .user-tooltip-right-bottom-row {
             display: flex;
             flex-direction: row;
-            background-color: #f5337e;
+            background-color: var(--background-color);
             border-radius: 0 0 20px 20px;
             min-height: 80px;
             padding: 5px 15px 10px 15px;

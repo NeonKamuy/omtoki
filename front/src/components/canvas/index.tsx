@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { IIndexedUser } from "../../../../shared/interfaces/user";
+import { IIndexedUser } from "../../shared/interfaces/user";
 import { useParticles } from "./lib/hooks/w-ref-particles";
 import { __SETTINGS__ } from "./settings";
 import { useUserTooltip } from "../user-tooltip/hooks/user-tooltip";

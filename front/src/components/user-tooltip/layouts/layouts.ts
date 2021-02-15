@@ -1,4 +1,4 @@
-import Utils from "../../../../../shared/utils";
+import Utils from "../../../shared/utils";
 import { __SETTINGS__ } from "../../canvas/settings";
 import Particle from "../../canvas/lib/particle";
 import { ITooltipLayouts } from "../src/interfaces";
@@ -20,7 +20,10 @@ export class UserTooltipLayouts {
 
     private static getDefaultLayout(particle: Particle): string {
         return `
-            <div class="user-tooltip-layout-default user-tooltip-container">
+            <div class="user-tooltip-layout-default user-tooltip-container" style="
+            --color: ${__SETTINGS__.PARTICLE.COLOR_BY_BGCOLOR[particle.bgColor]};
+            --background-color: ${particle.bgColor};
+        ">
 
                 <div class="user-tooltip-left-column">
                 

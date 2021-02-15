@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Navbar } from "react-bootstrap";
-import { BurgerModalButton } from "./burger-modal";
+import { BurgerModalButton } from "../../../components/burger-modal";
 
 export const Header: React.FC<{}> = React.memo(() => {
     return (

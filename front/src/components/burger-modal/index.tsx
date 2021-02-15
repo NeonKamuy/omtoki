@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useRef, useState } from "react";
 import { Modal, Form, Button, ListGroup } from "react-bootstrap";
 import "./styles/modal.scss";
 import { BurgerButton } from "./burger-button";
-import { ModalContext } from "../../context/modal-context";
+import { ModalContext } from "../../views/particles/context/modal-context";
 
 export const BurgerModalButton: React.FC<{}> = React.memo(() => {
     const [isOpen, setIsOpen] = useState(false);

@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
-import { ModalContext } from "../../context/modal-context";
+import { ModalContext } from "../../views/particles/context/modal-context";
 import "./index.scss";
 import { AccountModalForm } from "./modal-form";
 

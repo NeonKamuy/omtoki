@@ -14,6 +14,14 @@ export const __SETTINGS__ = {
             minRadius: 0,
             speed: 10,
         },
+        ALLOWED_BGCOLORS: ["#E143FD", "#FFCC00", "#4BA468", "#EC5178", "#ADE9DF"],
+        COLOR_BY_BGCOLOR: {
+            "#E143FD": "white",
+            "#FFCC00": "black",
+            "#4BA468": "white",
+            "#EC5178": "white",
+            "#ADE9DF": "black",
+        } as Record<string, "white" | "black">,
         MOVE: {
             direction: "none" as IVelocityDirection,
             straight: false,

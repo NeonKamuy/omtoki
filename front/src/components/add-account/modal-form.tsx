@@ -1,8 +1,8 @@
 import React, { useCallback } from "react";
 import { Modal, Form, Button, InputGroup, FormControl } from "react-bootstrap";
-import UserController from "../../../../controllers/users";
+import UserController from "../../controllers/users";
 import "./index.scss";
-import { UserSampleTooltip } from "../user-tooltip/sample-tooltip";
+import { UserInteractiveTooltip } from "../user-tooltip/interactive-tooltip";
 
 export const AccountModalForm: React.FC<{ isOpen: boolean; toggleIsOpen: () => void }> = (props) => {
     const { isOpen, toggleIsOpen } = props;
@@ -27,13 +27,13 @@ export const AccountModalForm: React.FC<{ isOpen: boolean; toggleIsOpen: () => v
             <Modal.Body className="account-modal-form body">
                 <div className="sector"><span>Карточка</span></div>
                 <div className="sector">
-                    <UserSampleTooltip />
+                    <UserInteractiveTooltip onUserInfoChange={()=>{}} />
                 </div>
                 <div className="sector"><span>Навыки</span></div>
                 <div className="sector">
                     <textarea placeholder="Например - Java, SQL, Ruby"></textarea>
                 </div>
-                <div className="sector"><span>Телеграм</span></div>
+                <div className="sector"><span>Телегрsам</span></div>
                 <div className="sector">
                     <InputGroup className="tg-input-group">
                         <InputGroup.Prepend>

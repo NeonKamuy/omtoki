@@ -1,11 +1,11 @@
 import React from "react";
-import { useUsers } from "../../../hooks/users";
+import { useUsers } from "../../../controllers/users/hooks";
 import { IIndexedUser } from "../../../shared/interfaces/user";
-import { ParticleContainer } from "./canvas";
+import { ParticleContainer } from "../../../components/canvas";
 
 export const Content: React.FC<{}> = () => {
     // const elements: IIndexedUser[] = useUsers();
-    const elements = new Array(1000).fill(0).map(e => ({name: "name", description:"desc", id: Math.random() * 55555555 + ""}));
+    const elements = new Array(1000).fill(0).map(e => ({name: "Магумамбед Вальфрендович", description:"PHP / JS / Python", id: Math.random() * 55555555 + ""}));
 
     return (
         <div>
