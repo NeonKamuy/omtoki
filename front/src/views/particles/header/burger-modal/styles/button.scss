@@ -4,9 +4,12 @@ $bar-thickness: $button-width * 0.03; // The thickness of the button bars
 $button-pad: $button-width * 0.5; // The left/right padding between button area and bars.
 $button-transistion-duration: 0.2s; // The transition duration
 
-$c-hamburger-line-color: white;
+$c-hamburger-line-color: black;
+$c-hamburger-active-color: white;
+$c-hamburger-circle-color: black;
+$c-hamburger-active-circle-color: white;
 
-$c-hamburger--x-bgcolor: #b2b2b2;
+$c-hamburger--x-bgcolor: transparent;
 $c-hamburger--x-bgcolor-hover: $c-hamburger--x-bgcolor;
 $c-hamburger--x-active-opacity: 0;
 $c-hamburger--x-active-bgcolor: rgba(0, 0, 0, $c-hamburger--x-active-opacity);
@@ -28,7 +31,7 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
   appearance: none;
   box-shadow: none;
   border-radius: none;
-  border: none;
+  border: 1px solid $c-hamburger-circle-color;
   cursor: pointer;
   transition: background $button-transistion-duration;
 }
@@ -96,6 +99,7 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
 /* active state, i.e. menu open */
 .c-hamburger--x.is-active {
   background-color: $c-hamburger--x-active-bgcolor;
+  border: 1px solid $c-hamburger-active-circle-color;
 }
 
 .c-hamburger--x.is-active:hover {
@@ -120,5 +124,6 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
 
 .c-hamburger--x.is-active span::before,
 .c-hamburger--x.is-active span::after {
+  background-color: $c-hamburger-active-color;
   transition-delay: 0s, $button-transistion-duration;
 }

@@ -13,7 +13,7 @@ export const __SETTINGS__ = {
             direction: "none" as IVelocityDirection,
             straight: false,
             random: true,
-            speed: 2,
+            speed: 4,
         },
         BASE_VELOCITY_BY_DIRECTION: {
             top: { x: 0, y: -1 },
