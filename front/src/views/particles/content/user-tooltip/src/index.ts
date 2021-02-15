@@ -1,4 +1,4 @@
-import Utils from "../../../../../../../shared/utils";
+import Utils from "../../../../../shared/utils";
 import { IAAppearTooltip, IBoundExcessions, IExcessionDirections, ITooltipLayouts } from "./interfaces";
 import TooltipLayoutManager from "./layout-manager";
 

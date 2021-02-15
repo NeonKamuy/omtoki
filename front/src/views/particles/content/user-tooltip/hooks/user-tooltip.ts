@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Particle from "../../particle";
-import { __SETTINGS__ } from "../../../settings";
+import Particle from "../../canvas/lib/particle";
+import { __SETTINGS__ } from "../../canvas/settings";
 import { UserTooltipLayouts } from "../layouts/layouts";
 import { useTooltip } from "./tooltip";
 

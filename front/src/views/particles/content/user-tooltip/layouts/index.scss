@@ -4,10 +4,12 @@
         margin: 15px;
         height: 100%;
         max-height: 300px;
-        width: 290px;
+        width: 272px;
         color: white;
         font-size: 1em;
+        font-family: "cera-pro";
         background-color: transparent;
+
     }
 
     .user-tooltip-left-column {
@@ -23,13 +25,16 @@
             border-radius: 20px 0 0 20px;
             background-color: #f5337e;
 
+
             .user-tooltip-picture {
+                position: relative;
                 border-radius: 50%;
                 background-repeat: no-repeat;
                 background-size: cover;
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
                 margin: auto;
+
             }
         }
 
@@ -48,8 +53,7 @@
                 top: 0%;
                 left: 80%;
                 border-top-right-radius: 25px;
-                // background-color: black;
-                box-shadow: 5px -15px 0 0 #f5337e;
+                background-color: #f5337e;
                 z-index: 1052;
             }
         }
@@ -63,7 +67,8 @@
         .user-tooltip-right-top-row {
             display: flex;
             flex-direction: row;
-            padding: 5px 15px 0px 15px;
+            align-items: center;
+            padding: 5px 15px 0px 5px;
             height: 80px;
             background-color: #f5337e;
             border-radius: 0 12px 0 0;

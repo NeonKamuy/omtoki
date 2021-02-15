@@ -1,6 +1,6 @@
-import Utils from "../../../../../../../shared/utils";
-import { __SETTINGS__ } from "../../../settings";
-import Particle from "../../particle";
+import Utils from "../../../../../shared/utils";
+import { __SETTINGS__ } from "../../canvas/settings";
+import Particle from "../../canvas/lib/particle";
 import { ITooltipLayouts } from "../src/interfaces";
 
 export class UserTooltipLayouts {

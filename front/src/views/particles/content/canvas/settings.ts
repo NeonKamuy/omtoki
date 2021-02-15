@@ -9,6 +9,11 @@ export const __SETTINGS__ = {
     PARTICLE: {
         RADIUS: 2.5,
         REACT_ON_HOVER: true,
+        PULSATION: {
+            maxRadius: 5,
+            minRadius: 0,
+            speed: 10,
+        },
         MOVE: {
             direction: "none" as IVelocityDirection,
             straight: false,
