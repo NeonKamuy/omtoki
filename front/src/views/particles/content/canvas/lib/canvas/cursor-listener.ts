@@ -18,9 +18,6 @@ export default class CursorListener {
         } else {
             this.__cursorMode = "mouse";
             this.__target.onmousemove = (e) => this.handleMouseMove(e);
-            this.__target.onmousedown = (e) => this.handleMouseDown(e);
-            this.__target.onmouseup = (e) => this.handleMouseUp(e);
-            this.__target.onmouseleave = (e) => this.handleMouseLeave(e);
         }
     }
 
@@ -41,20 +38,6 @@ export default class CursorListener {
             isMouseDown: false,
             coordinates: { x, y },
         };
-    }
-
-    private handleMouseDown(e: MouseEvent) {
-        if (!this.__status) return;
-        this.__status.isMouseDown = true;
-    }
-
-    private handleMouseUp(e: MouseEvent) {
-        if (!this.__status) return;
-        this.__status.isMouseDown = false;
-    }
-
-    private handleMouseLeave(e: MouseEvent) {
-        this.__status = null;
     }
 
     public get status() {
