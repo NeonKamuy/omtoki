@@ -50,7 +50,7 @@ interface IStyle {
     backgroundColor: string;
 }
 
-interface IUserInfo extends IUserBase {
+export interface IUserInfo extends IUserBase {
     picture: File | null;
 }
 

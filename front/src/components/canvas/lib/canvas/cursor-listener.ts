@@ -6,6 +6,7 @@ export default class CursorListener {
     private readonly __target: HTMLElement;
     private __cursorMode: ICursorMode;
     private __openingTouch = false;
+    private __lastInteraction: Date | null = null;
 
     private __status: IMouseStatus | null = null;
 
@@ -18,6 +19,7 @@ export default class CursorListener {
         } else {
             this.__cursorMode = "mouse";
             this.__target.onmousemove = (e) => this.handleMouseMove(e);
+            this.__target.onmouseleave = (e) => this.handleMouseLeave();
         }
     }
 
@@ -34,10 +36,21 @@ export default class CursorListener {
 
     private handleMouseMove(e: MouseEvent) {
         const { offsetX: x, offsetY: y } = e;
+
+        this.__lastInteraction = new Date();
         this.__status = {
             isMouseDown: false,
             coordinates: { x, y },
         };
+    }
+
+    private handleMouseLeave() {
+        this.__lastInteraction = null;
+
+        setTimeout(() => {  // Smoothier mouseleave, thrembling guard 
+            if (this.__lastInteraction !== null) return;
+            this.__status = null;
+        }, 100);
     }
 
     public get status() {
