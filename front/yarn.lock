@@ -3420,11 +3420,6 @@ cliui@^6.0.0:
     strip-ansi "^6.0.0"
     wrap-ansi "^6.2.0"
 
-clsx@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
-  integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
-
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -3747,6 +3742,11 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+cropperjs@^1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-1.5.10.tgz#ac0c240feb2a3b397ef52b57c03375cd17041a8e"
+  integrity sha512-Zlggv+unsBXVc7EQip6rnOqFnFpHOIc4f8HqzAj3RQNEUNjrCCJyE7OlT/V8S0lO2m4ytRoceTlgzEh1DNMU0Q==
 
 cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -9392,6 +9392,13 @@ react-bootstrap@^1.4.3:
     uncontrollable "^7.0.0"
     warning "^4.0.3"
 
+react-cropper@^2.1.6:
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/react-cropper/-/react-cropper-2.1.6.tgz#50289774400f4533b577f1b95f20ddcc090cd4fb"
+  integrity sha512-a4/FEhCJ1XVMUZYQoVgwidBINbGot6ene5n/TwgEBkXY14dUyvbTr9P2nIWwE6KwtpvNpHZfyg4WqaeIBW1IBw==
+  dependencies:
+    cropperjs "^1.5.10"
+
 react-dev-utils@^11.0.2:
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-11.0.2.tgz#98aed16ef50f808ee17b32def75eb15f89655802"
@@ -9457,15 +9464,6 @@ react-helmet@^6.1.0:
     prop-types "^15.7.2"
     react-fast-compare "^3.1.1"
     react-side-effect "^2.1.0"
-
-react-image-crop@^8.6.6:
-  version "8.6.6"
-  resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-8.6.6.tgz#326f85b4da63c2f39a610f8832abea5d551a338f"
-  integrity sha512-2iQHKp12dYb6Fu2iN/Mg19BeLMgrbdOuKkU9k0RH7CHX6ZZylOlhfCM3/RsECbKnjGJRtGpXniGF+/i9CGis1A==
-  dependencies:
-    clsx "^1.1.1"
-    core-js "^3.6.5"
-    prop-types "^15.7.2"
 
 react-is@^16.3.2, react-is@^16.8.1:
   version "16.13.1"
