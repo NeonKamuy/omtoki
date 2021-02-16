@@ -32,6 +32,7 @@ export default class ParticlesCanvas extends HTMLCanvas {
         this.__animationTimings.lastCall = now - (delta % interval);
 
         this.clear();
+        this.fill();
         this.__particles.draw();
         this.__particles.prepareNextFrame();
     }

@@ -43,6 +43,9 @@ export const __SETTINGS__ = {
     TOOLTIP: {
         eventOn: "usertooltipopen",
         eventOff: "usertooltipclose"
+    },
+    CANVAS: {
+        BGCOLOR: "#8156FB"
     }
 }
 

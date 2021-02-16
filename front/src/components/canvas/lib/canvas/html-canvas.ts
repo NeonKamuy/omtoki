@@ -1,3 +1,4 @@
+import { __SETTINGS__ } from "../../settings";
 import { ICursor } from "../particle/interfaces";
 import CursorListener from "./cursor-listener";
 
@@ -24,7 +25,8 @@ export default class HTMLCanvas {
         this.__cursor = new CursorListener(this.__canvas);
     }
 
-    public paint() {
+    public fill() {
+        this.__context.fillStyle = __SETTINGS__.CANVAS.BGCOLOR;
         this.__context.fillRect(0, 0, this.width, this.height);
     }
 
