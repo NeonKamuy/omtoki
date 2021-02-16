@@ -54,6 +54,7 @@ export default class ParticlesManager {
 
             if (!isHovered) {
                 this.moveParticle(particle);
+                particle.pulse()
                 continue;
             }
 

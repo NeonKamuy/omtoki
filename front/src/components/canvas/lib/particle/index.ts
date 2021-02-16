@@ -18,6 +18,9 @@ export default class Particle {
     public radius = __SETTINGS__.PARTICLE.RADIUS;
     public readonly defaultRadius = __SETTINGS__.PARTICLE.RADIUS;
 
+    private __isBubbled = false;
+    private __pulseMultiplier: 1 | -1 = 1;
+
     constructor(args: { canvas: ParticlesCanvas; data: IIndexedUser }) {
         const { canvas, data } = args;
         this.__canvas = canvas;
@@ -65,11 +68,31 @@ export default class Particle {
     }
 
     public bubble() {
+        if (this.__isBubbled) return;
         this.radius = this.defaultRadius * 2;
     }
 
     public unbubble() {
+        if (!this.__isBubbled) return;
         this.radius = this.defaultRadius;
+    }
+
+    public pulse() {
+        if (this.__isBubbled) return;
+
+        const { minRadius, maxRadius, speed, randCoeff } = __SETTINGS__.PARTICLE.PULSATION;
+        const overMax = this.radius >= maxRadius;
+        const underMin = this.radius <= minRadius;
+        
+        
+        this.__pulseMultiplier = overMax ? -1 : underMin ? 1 : this.__pulseMultiplier;
+        const randMultiplier = _.random(0, 1) > 0.5 ? 1 : -1;
+        const randSurplus = Math.random() * randCoeff * randMultiplier;
+
+
+        const estimate = this.radius + speed * this.__pulseMultiplier + randSurplus;
+
+        this.radius = Math.max(Math.min(estimate, maxRadius), minRadius);
     }
 
     private overlapsArea(coordinates: ICoordinates, area: IArea): boolean {

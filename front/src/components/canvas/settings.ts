@@ -10,9 +10,10 @@ export const __SETTINGS__ = {
         RADIUS: 2.5,
         REACT_ON_HOVER: true,
         PULSATION: {
-            maxRadius: 5,
-            minRadius: 0,
-            speed: 10,
+            maxRadius: 3.5,
+            minRadius: 1.5,
+            speed: 0.1,  // pixels to add per frame
+            randCoeff: 0.2,
         },
         ALLOWED_BGCOLORS: ["#E143FD", "#FFCC00", "#4BA468", "#EC5178", "#ADE9DF"],
         COLOR_BY_BGCOLOR: {
