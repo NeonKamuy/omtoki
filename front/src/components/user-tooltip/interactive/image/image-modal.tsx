@@ -43,6 +43,8 @@ export const ImageUploadModal: React.FC<{
         []
     );
 
+    const handleImageCropSubmit = useCallback(() => {}, []);
+
     return (
         <>
             <Modal
@@ -72,7 +74,9 @@ export const ImageUploadModal: React.FC<{
                     </div>
                 </Modal.Body>
 
-                {image && <ImageCrop image={image} />}
+                {image && (
+                    <ImageCrop image={image} onSubmit={handleImageCropSubmit} />
+                )}
             </Modal>
 
             <input
