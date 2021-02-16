@@ -24,18 +24,21 @@
 
 .account-modal-form {
     margin: auto;
-    height: 629px;
+    max-width: max-content;
+    padding: 40px 40px 0 40px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.account-modal-form.body {
+    padding: 0;
+    margin: 0;
+    height: 600px;
     width: 360px;
     font-family: "cera-pro";
-    padding: 48px 48px 48px 40px;
-
-    .body {
-        margin: 0;
-        padding: 0;
-    }
 
     .sector {
-        width: calc(100% - 88px);
         margin-bottom: 10px;
 
         &>textarea {

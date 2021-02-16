@@ -5,7 +5,8 @@ import "../../../static/arrow-down/arrow-down.css";
 import { IProps } from "./interfaces";
 import { defaultUserInfo, filledStyle, defaultStyle } from "./constants";
 import { IUserInfo } from "./interfaces";
-import { ImageUploadModal } from "./image-modal";
+import { ImageUploadModal } from "./image/image-modal";
+import { ImageCrop } from "./image/image-crop";
 
 export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
     const { onUserInfoChange } = props;
@@ -39,10 +40,11 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
 
     const [imageModalOpen, setImageModalOpen] = useState(false);
     const toggleImageModalOpen = useCallback(
-        (event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            setImageModalOpen(
-                (e) => parentIsVisibleRef.current && (event ? !!event : !e)
-            );
+        (arg?: React.MouseEvent<HTMLDivElement, MouseEvent> | boolean) => {
+            setImageModalOpen((e) => {
+                const res = parentIsVisibleRef.current && (arg ? !!arg : !e);
+                return res;
+            });
         },
         []
     );
