@@ -3,7 +3,10 @@ import { IUserInfo } from "../user-tooltip/interactive-tooltip";
 import { ITooltipStatus } from "./error-tooltips";
 import { defaultTooltipStatus } from "./error-tooltips";
 
-export function useElementRefs(): Record<"cardRef" | "skillRef" | "tgRef", React.MutableRefObject<any>> {
+export function useElementRefs(): Record<
+    "cardRef" | "skillRef" | "tgRef",
+    React.MutableRefObject<any>
+> {
     const cardRef = useRef(null);
     const skillRef = useRef(null);
     const tgRef = useRef(null);
@@ -12,7 +15,11 @@ export function useElementRefs(): Record<"cardRef" | "skillRef" | "tgRef", React
 }
 
 export function useUserInfo() {
-    const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
+    const [userInfo, setUserInfo] = useState<IUserInfo>({
+        description: "",
+        name: "",
+        picture: null,
+    });
     const userInfoRef = useRef(userInfo);
     userInfoRef.current = userInfo;
 
@@ -20,7 +27,9 @@ export function useUserInfo() {
 }
 
 export function useTooltipStatus() {
-    const [tooltipStatus, setTooltipStatus] = useState<ITooltipStatus>(defaultTooltipStatus);
+    const [tooltipStatus, setTooltipStatus] = useState<ITooltipStatus>(
+        defaultTooltipStatus
+    );
     const tooltipTimeoutRef = useRef<number | null>(null);
 
     const setTooltipTimeout = useCallback((newStatus: ITooltipStatus) => {

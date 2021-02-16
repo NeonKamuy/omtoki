@@ -1,12 +1,16 @@
 .user-tooltip-layout-default.interactive {
+    --interactive-bgcolor:white;
+    --interactive-color: white;
+
     &.user-tooltip-container {
         margin: 0;
-        color: var(--color);
+        color: var(--interactive-color);
+        background-color: white !important;
     }
 
     .user-tooltip-left-column {
         .user-tooltip-left-top-row {
-            background-color: var(--background-color);
+            background-color: var(--interactive-bgcolor);
             border-top: 1px solid black;
             border-left: 1px solid black;
             border-bottom: 1px solid black;
@@ -36,7 +40,7 @@
                 margin-top: -2px;
                 left: 76px;
                 border-top-right-radius: 25px;
-                background-color: var(--background-color);
+                background-color: var(--interactive-bgcolor);
                 transform: skewX(45deg);
                 z-index: 1052;
                 border-bottom-right-radius: 25px;
@@ -46,12 +50,12 @@
 
     .user-tooltip-right-column {
         .user-tooltip-right-top-row {
-            background-color: var(--background-color);
+            background-color: var(--interactive-bgcolor);
             border-top: 1px solid black;
             border-right: 1px solid black;
         }
         .user-tooltip-right-bottom-row {
-            background-color: var(--background-color);
+            background-color: var(--interactive-bgcolor);
             border-bottom: 1px solid black;
             border-left: 1px solid black;
             border-right: 1px solid black;
@@ -66,6 +70,8 @@
         padding: 0;
         margin: 0;
         resize: none;
+        background-color: var(--interactive-bgcolor);
+        color: var(--interactive-color);
 
         &:active, &:focus {
             border: none;
