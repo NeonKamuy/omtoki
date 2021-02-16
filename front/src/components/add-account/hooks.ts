@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
-import { IUserInfo } from "../user-tooltip/interactive-tooltip";
+import { IUserInfo } from "../user-tooltip/interactive/interfaces";
 import { ITooltipStatus } from "./error-tooltips";
 import { defaultTooltipStatus } from "./error-tooltips";
 

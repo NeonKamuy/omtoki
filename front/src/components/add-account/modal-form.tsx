@@ -3,9 +3,8 @@ import { Modal, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import UserController from "../../controllers/users";
 import "./index.scss";
 import {
-    IUserInfo,
     UserInteractiveTooltip,
-} from "../user-tooltip/interactive-tooltip";
+} from "../user-tooltip/interactive/interactive-tooltip";
 import {
     defaultTooltipStatus,
     ErrorTooltips,
@@ -83,7 +82,7 @@ export const AccountModalForm: React.FC<{
                         <span>Карточка</span>
                     </div>
                     <div className="sector" ref={cardRef}>
-                        <UserInteractiveTooltip onUserInfoChange={setUserInfo} />
+                        <UserInteractiveTooltip onUserInfoChange={setUserInfo} parentIsVisible={isOpen} />
                     </div>
                     <div className="sector">
                         <span>Навыки</span>

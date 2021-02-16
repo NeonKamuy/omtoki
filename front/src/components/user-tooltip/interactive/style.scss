@@ -1,5 +1,5 @@
 .user-tooltip-layout-default.interactive {
-    --interactive-bgcolor:white;
+    --interactive-bgcolor: white;
     --interactive-color: white;
 
     &.user-tooltip-container {
@@ -15,15 +15,6 @@
             border-left: 1px solid black;
             border-bottom: 1px solid black;
             cursor: pointer;
-
-            .user-tooltip-picture.empty {
-                i {
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    color: black;
-                }
-            }
         }
 
         .user-tooltip-left-bottom-row {
@@ -73,10 +64,60 @@
         background-color: var(--interactive-bgcolor);
         color: var(--interactive-color);
 
-        &:active, &:focus {
+        &:active,
+        &:focus {
             border: none;
             box-shadow: none;
             outline: none;
         }
+    }
+}
+
+.interactive-user-tooltip-image-upload-form {
+    background-color: black;
+    color: white;
+    width: max-content;
+    margin: auto;
+    padding: 20px;
+}
+
+.interactive-user-tooltip-image-upload-form .image-upload-container {
+    .upload-circle-outer {
+        position: relative;
+        width: 146px;
+        height: 146px;
+        background-color: white;
+        margin: auto;
+        border-radius: 50%;
+
+        .upload-circle-inner {
+            position: absolute;
+            width: 47px;
+            height: 47px;
+            background-color: #8156fb;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+    }
+
+    .upload-text {
+        max-width: 212px;
+        margin: auto;
+        font-family: cera-pro;
+        font-size: 14px;
+        margin-top: 35px;
+    }
+}
+
+.centered-picture-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    i {
+        color: black;
     }
 }

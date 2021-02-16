@@ -1,11 +1,16 @@
 import React, { useCallback, useRef, useState } from "react";
-import "./layouts/index.scss";
-import "./layouts/interactive.scss";
-import "../../static/arrow-down/arrow-down.css";
-import { IUserBase } from "../../shared/interfaces/user";
+import "../layouts/index.scss";
+import "./style.scss";
+import "../../../static/arrow-down/arrow-down.css";
+import { IProps } from "./interfaces";
+import { defaultUserInfo, filledStyle, defaultStyle } from "./constants";
+import { IUserInfo } from "./interfaces";
+import { ImageUploadModal } from "./image-modal";
 
 export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
     const { onUserInfoChange } = props;
+    const parentIsVisibleRef = useRef(props.parentIsVisible);
+    parentIsVisibleRef.current = props.parentIsVisible;
 
     const [info, setInfo] = useState<IUserInfo>(defaultUserInfo);
     const infoRef = useRef(info);
@@ -32,6 +37,16 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
         });
     }, []);
 
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+    const toggleImageModalOpen = useCallback(
+        (event?: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            setImageModalOpen(
+                (e) => parentIsVisibleRef.current && (event ? !!event : !e)
+            );
+        },
+        []
+    );
+
     const isFilled = !!info.name && !!info.description && !!info.picture;
     const style = isFilled ? filledStyle : defaultStyle;
 
@@ -42,8 +57,13 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
         >
             <div className="user-tooltip-left-column">
                 <div className="user-tooltip-left-top-row" style={style as any}>
-                    <div className="user-tooltip-picture empty">
-                        <i className="gg-arrow-down"></i>
+                    <div
+                        className="user-tooltip-picture"
+                        onClick={toggleImageModalOpen}
+                    >
+                        <div className="centered-picture-arrow">
+                            <i className="gg-arrow-down"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -70,35 +90,10 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
                     ></textarea>
                 </div>
             </div>
+            <ImageUploadModal
+                isOpen={imageModalOpen}
+                toggleIsOpen={toggleImageModalOpen}
+            />
         </div>
     );
-};
-
-interface IProps {
-    onUserInfoChange: (info: IUserInfo) => void;
-}
-
-interface IStyle {
-    ["--interactive-color"]: string;
-    ["--interactive-bgcolor"]: string;
-}
-
-export interface IUserInfo extends IUserBase {
-    picture: File | null;
-}
-
-const defaultStyle: IStyle = {
-    "--interactive-color": "#b8b8b8",
-    "--interactive-bgcolor": "white",
-};
-
-const filledStyle: IStyle = {
-    "--interactive-color": "white",
-    "--interactive-bgcolor": "#8156FB",
-};
-
-const defaultUserInfo: IUserInfo = {
-    name: "",
-    description: "",
-    picture: null,
 };
