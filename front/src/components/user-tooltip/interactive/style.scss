@@ -128,6 +128,8 @@
     right: 50%;
     bottom: 50%;
     transform: translate(50%, 50%);
+    max-height: 80vh;
+    width: 80vw;
 
     .crop-controls {
         display: flex;

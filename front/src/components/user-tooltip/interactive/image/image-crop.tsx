@@ -8,7 +8,7 @@ export const ImageCrop: React.FC<{
     image: string;
     onSubmit: (dataURL: string) => void;
 }> = (props) => {
-    const { image } = props;
+    const { image, onSubmit } = props;
 
     const cropperRef = useRef<HTMLImageElement>(null);
     const croppedImageRef = useRef<string | null>(null);
@@ -19,6 +19,16 @@ export const ImageCrop: React.FC<{
         const croppedImage = cropper.getCroppedCanvas().toDataURL();
         croppedImageRef.current = croppedImage;
     }, []);
+
+    const handleSubmit = useCallback(() => {
+        const dataURL = croppedImageRef.current;
+        if (!dataURL) return;
+
+        onSubmit(dataURL);
+        croppedImageRef.current = null;
+    }, []);
+
+    const handleCancel = useCallback(() => {}, []);
 
     return (
         <div className="interactive-user-tooltip-img-crop-container">
@@ -34,8 +44,12 @@ export const ImageCrop: React.FC<{
                 ref={cropperRef}
             />
             <div className="crop-controls">
-                <Button variant="danger">Отменить</Button>
-                <Button variant="success">Сохранить</Button>
+                <Button variant="danger" onClick={handleCancel}>
+                    Отменить
+                </Button>
+                <Button variant="success" onClick={handleSubmit}>
+                    Сохранить
+                </Button>
             </div>
         </div>
     );

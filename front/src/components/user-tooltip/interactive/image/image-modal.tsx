@@ -5,8 +5,9 @@ import { ImageCrop } from "./image-crop";
 export const ImageUploadModal: React.FC<{
     isOpen: boolean;
     toggleIsOpen: (open?: boolean) => void;
+    onImageChange: (dataURL: string) => void;
 }> = (props) => {
-    const { isOpen, toggleIsOpen } = props;
+    const { isOpen, toggleIsOpen, onImageChange } = props;
     const isOpenRef = useRef(isOpen);
     isOpenRef.current = isOpen;
 
@@ -43,7 +44,11 @@ export const ImageUploadModal: React.FC<{
         []
     );
 
-    const handleImageCropSubmit = useCallback(() => {}, []);
+    const handleImageCropSubmit = useCallback((dataURL: string) => {
+        setImage(null);
+        toggleIsOpen(false);
+        onImageChange(dataURL);
+    }, []);
 
     return (
         <>

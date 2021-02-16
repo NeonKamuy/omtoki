@@ -49,6 +49,10 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
         []
     );
 
+    const handleImageChange = useCallback((dataURL: string) => {
+        handleInput("picture", dataURL);
+    }, []);
+
     const isFilled = !!info.name && !!info.description && !!info.picture;
     const style = isFilled ? filledStyle : defaultStyle;
 
@@ -59,14 +63,24 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
         >
             <div className="user-tooltip-left-column">
                 <div className="user-tooltip-left-top-row" style={style as any}>
-                    <div
-                        className="user-tooltip-picture"
-                        onClick={toggleImageModalOpen}
-                    >
-                        <div className="centered-picture-arrow">
-                            <i className="gg-arrow-down"></i>
+                    {info.picture ? (
+                        <div
+                            className="user-tooltip-picture"
+                            style={{
+                                backgroundImage: `url(${info.picture})`,
+                            }}
+                            onClick={toggleImageModalOpen}
+                        />
+                    ) : (
+                        <div
+                            className="user-tooltip-picture"
+                            onClick={toggleImageModalOpen}
+                        >
+                            <div className="centered-picture-arrow">
+                                <i className="gg-arrow-down"></i>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <div className="user-tooltip-left-bottom-row"></div>
@@ -95,6 +109,7 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
             <ImageUploadModal
                 isOpen={imageModalOpen}
                 toggleIsOpen={toggleImageModalOpen}
+                onImageChange={handleImageChange}
             />
         </div>
     );
