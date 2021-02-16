@@ -1,5 +1,5 @@
-import React, { useCallback } from "react";
-import { Modal, Form, Button, InputGroup, FormControl } from "react-bootstrap";
+import React, { useCallback, useState } from "react";
+import { Modal, Form, Button, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import UserController from "../../controllers/users";
 import "./index.scss";
 import { UserInteractiveTooltip } from "../user-tooltip/interactive-tooltip";
@@ -7,7 +7,8 @@ import { UserInteractiveTooltip } from "../user-tooltip/interactive-tooltip";
 export const AccountModalForm: React.FC<{ isOpen: boolean; toggleIsOpen: () => void }> = (props) => {
     const { isOpen, toggleIsOpen } = props;
 
-    const handleFormSubmit = useCallback((args) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const handleSubmit = useCallback((args) => {
         toggleIsOpen();
         const {
             target: [{ value: name }, { value: description }],
@@ -25,15 +26,21 @@ export const AccountModalForm: React.FC<{ isOpen: boolean; toggleIsOpen: () => v
             contentClassName="account-modal-form"
         >
             <Modal.Body className="account-modal-form body">
-                <div className="sector"><span>Карточка</span></div>
                 <div className="sector">
-                    <UserInteractiveTooltip onUserInfoChange={()=>{}} />
+                    <span>Карточка</span>
                 </div>
-                <div className="sector"><span>Навыки</span></div>
+                <div className="sector">
+                    <UserInteractiveTooltip onUserInfoChange={() => {}} />
+                </div>
+                <div className="sector">
+                    <span>Навыки</span>
+                </div>
                 <div className="sector">
                     <textarea placeholder="Например - Java, SQL, Ruby"></textarea>
                 </div>
-                <div className="sector"><span>Телегрsам</span></div>
+                <div className="sector">
+                    <span>Телеграм</span>
+                </div>
                 <div className="sector">
                     <InputGroup className="tg-input-group">
                         <InputGroup.Prepend>
@@ -42,9 +49,24 @@ export const AccountModalForm: React.FC<{ isOpen: boolean; toggleIsOpen: () => v
                         <FormControl className="tg-input" />
                     </InputGroup>
                 </div>
-                <div className="sector submit">
-                    <span>Вступить</span>
-                </div>
+
+                {isLoading ? (
+                    <div className="sector submit loading">
+                        <Spinner
+                            as="span"
+                            animation="grow"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            style={{ marginRight: 10 }}
+                        />
+                        <span>Отправка...</span>
+                    </div>
+                ) : (
+                    <div className="sector submit" onClick={handleSubmit}>
+                        <span>Вступить</span>
+                    </div>
+                )}
             </Modal.Body>
         </Modal>
     );

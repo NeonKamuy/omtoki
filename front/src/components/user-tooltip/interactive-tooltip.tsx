@@ -4,19 +4,19 @@ import "./layouts/interactive.scss";
 import "../../static/arrow-down/arrow-down.css";
 import { IUserBase } from "../../shared/interfaces/user";
 
-export const UserInteractiveTooltip: React.FC<IProps> = props => {
-    const {onUserInfoChange} = props;
+export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
+    const { onUserInfoChange } = props;
     const style = props.style ?? defaultStyle;
 
     const [info, setInfo] = useState<IUserInfo | null>(null);
 
-    const handleInfoChange = useCallback(()=>{}, [])
+    const handleInfoChange = useCallback(() => {}, []);
 
     return (
         <div className="user-tooltip-layout-default user-tooltip-container interactive" style={style}>
             <div className="user-tooltip-left-column">
                 <div className="user-tooltip-left-top-row" style={style}>
-                    <div className="user-tooltip-picture">
+                    <div className="user-tooltip-picture empty">
                         <i className="gg-arrow-down"></i>
                     </div>
                 </div>
@@ -26,13 +26,14 @@ export const UserInteractiveTooltip: React.FC<IProps> = props => {
 
             <div className="user-tooltip-right-column">
                 <div className="user-tooltip-right-top-row">
-                    <span className="user-tooltip-text-content">Имя Фамилия</span>
+                    <input type="text" className="user-tooltip-text-input" placeholder="Имя Фамилия"></input>
                 </div>
 
                 <div className="user-tooltip-right-bottom-row">
-                    <span className="user-tooltip-text-content">
-                        На Java запустил ракету в космос. Очнулся, понял, что сон. Плакал
-                    </span>
+                    <textarea
+                        className="user-tooltip-text-input"
+                        placeholder="На Java запустил ракету в космос. Очнулся, понял, что сон. Плакал"
+                    ></textarea>
                 </div>
             </div>
         </div>
@@ -55,5 +56,5 @@ interface IUserInfo extends IUserBase {
 
 const defaultStyle: IStyle = {
     color: "#b8b8b8",
-    backgroundColor: "white"
-}
+    backgroundColor: "white",
+};

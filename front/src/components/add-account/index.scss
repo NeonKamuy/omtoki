@@ -36,7 +36,7 @@
         width: calc(100% - 88px);
         margin-bottom: 10px;
 
-        textarea {
+        &>textarea {
             height: 113px;
             width: 272px;
             border: 1px solid black;
@@ -69,8 +69,13 @@
             justify-content: center;
             align-items: center;
             color: white;
+            cursor: pointer;
 
-            span {
+            &.loading {
+                cursor: default;
+            }
+
+            &>span {
                 letter-spacing: 5px;
             }
         }
