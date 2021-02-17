@@ -109,7 +109,7 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
             <ImageUploadModal
                 isOpen={imageModalOpen}
                 toggleIsOpen={toggleImageModalOpen}
-                onImageChange={handleImageChange}
+                onSubmit={handleImageChange}
             />
         </div>
     );

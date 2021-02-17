@@ -98,6 +98,7 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
 
 /* active state, i.e. menu open */
 .c-hamburger--x.is-active {
+  z-index: 1051;
   background-color: $c-hamburger--x-active-bgcolor;
   border: 1px solid $c-hamburger-active-circle-color;
 }
