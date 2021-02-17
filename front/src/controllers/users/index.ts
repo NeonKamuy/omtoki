@@ -26,7 +26,10 @@ export default class UserController {
                         response: res,
                         cb: args.onLoaded,
                     })
-                );
+                ).catch(e => {
+                    alert(e);
+                    throw e;
+                });
         });
     }
 }
