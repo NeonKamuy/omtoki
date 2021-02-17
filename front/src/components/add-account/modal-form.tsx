@@ -82,6 +82,7 @@ export const AccountModalForm: React.FC<{
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 onHide={toggleIsOpen}
+                className="account-modal"
                 contentClassName="account-modal-form"
             >
                 <Modal.Body className="account-modal-form body">
