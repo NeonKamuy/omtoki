@@ -28,7 +28,7 @@ export class UserTooltipLayouts {
                 <div class="user-tooltip-left-column">
                 
                     <div class="user-tooltip-left-top-row">
-                        <div class="user-tooltip-picture"></div>
+                        <div class="user-tooltip-picture" style="url('${particle.data.picture}')"></div>
                     </div>
                 
                     <div class="user-tooltip-left-bottom-row">
