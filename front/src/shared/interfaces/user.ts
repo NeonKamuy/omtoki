@@ -2,6 +2,9 @@
 export interface IUserBase {
     name: string;
     description: string;
+    skills: string;
+    tg: string;
+    picture: string;
 }
 
 // Single User With Id

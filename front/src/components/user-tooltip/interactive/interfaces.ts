@@ -10,6 +10,6 @@ export interface IStyle {
     ["--interactive-bgcolor"]: string;
 }
 
-export interface IUserInfo extends IUserBase {
-    picture: File | null;
-}
+export interface IUserInfo extends Pick<IUserBase, "name" | "description"> {
+    picture: string | null;
+};

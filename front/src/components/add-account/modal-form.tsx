@@ -2,9 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { Modal, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import UserController from "../../controllers/users";
 import "./index.scss";
-import {
-    UserInteractiveTooltip,
-} from "../user-tooltip/interactive/interactive-tooltip";
+import { UserInteractiveTooltip } from "../user-tooltip/interactive/interactive-tooltip";
 import {
     defaultTooltipStatus,
     ErrorTooltips,
@@ -32,7 +30,7 @@ export const AccountModalForm: React.FC<{
         const newTooltipStatus = { ...defaultTooltipStatus };
         const userInfo = userInfoRef.current;
 
-        const skill = skillRef.current?.value;
+        const skills = skillRef.current?.value;
         const tg = tgRef.current?.value;
 
         let error = false;
@@ -45,7 +43,7 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showCard = true;
             error = true;
         }
-        if (!skill) {
+        if (!skills) {
             newTooltipStatus.showSkill = true;
             error = true;
         }
@@ -62,7 +60,16 @@ export const AccountModalForm: React.FC<{
         }
 
         setIsLoading(true);
-        // UserController.addUser({ data: { name, description }, onLoaded: () => window.location.reload() });
+        UserController.addUser({
+            data: {
+                name: userInfo.name,
+                description: userInfo.description,
+                picture: userInfo.picture!,
+                skills,
+                tg,
+            },
+            onLoaded: () => window.location.reload(),
+        });
     }, []);
 
     const { setUserInfo, userInfoRef } = useUserInfo();
@@ -82,7 +89,10 @@ export const AccountModalForm: React.FC<{
                         <span>Карточка</span>
                     </div>
                     <div className="sector" ref={cardRef}>
-                        <UserInteractiveTooltip onUserInfoChange={setUserInfo} parentIsVisible={isOpen} />
+                        <UserInteractiveTooltip
+                            onUserInfoChange={setUserInfo}
+                            parentIsVisible={isOpen}
+                        />
                     </div>
                     <div className="sector">
                         <span>Навыки</span>
