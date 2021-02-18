@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { IImage } from "../interfaces";
 import { ImageCrop } from "./image-crop";
 
 export const ImageUploadModal: React.FC<{
@@ -18,28 +19,37 @@ export const ImageUploadModal: React.FC<{
         fileInput.click();
     }, []);
 
-    const [image, setImage] = useState<string | null>(null);
+    const [image, setImage] = useState<IImage | null>(null);
     const imageRef = useRef(image);
     imageRef.current = image;
 
-    const handleImageChange = useCallback((fileURL: string | null) => {
-        isOpenRef.current && setImage(fileURL);
+    const handleImageChange = useCallback((image: IImage) => {
+        isOpenRef.current && setImage(image);
     }, []);
 
     useEffect(() => {
         if (!isOpen) setImage(null);
     }, [isOpen]);
 
+    const rawImageContainerRef = useRef<HTMLImageElement>(null);
     const handleFileChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-            event.stopPropagation();
-            event.preventDefault();
             const file = event.target?.files?.[0];
-
             if (!file) return;
 
             const fileURL = URL.createObjectURL(file);
-            handleImageChange(fileURL);
+
+            // Needed to get responsive size for crop container
+            const img = rawImageContainerRef.current!;
+            img.src = fileURL;
+            img.addEventListener("load", ()=>{
+                handleImageChange({
+                    url: fileURL,
+                    width: img.width,
+                    height: img.height,
+                });
+    
+            }, {once:true});
         },
         []
     );
@@ -94,6 +104,9 @@ export const ImageUploadModal: React.FC<{
                 onChange={handleFileChange}
                 hidden
             />
+            <img ref={rawImageContainerRef} style={{                maxHeight: "80vh",
+                maxWidth: "80vw",
+                position: "absolute", visibility: "hidden"}} />
         </>
     );
 };

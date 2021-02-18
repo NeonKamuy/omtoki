@@ -13,3 +13,5 @@ export interface IStyle {
 export interface IUserInfo extends Pick<IUserBase, "name" | "description"> {
     picture: string | null;
 };
+
+export interface IImage {url: string, width: number, height: number}
