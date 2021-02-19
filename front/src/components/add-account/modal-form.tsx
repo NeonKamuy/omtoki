@@ -69,7 +69,7 @@ export const AccountModalForm: React.FC<{
                 tg,
             },
             onLoaded: () => window.location.reload(),
-        }).then(() => setIsLoading(false));
+        }).finally(() => setIsLoading(false));
     }, []);
 
     const { setUserInfo, userInfoRef } = useUserInfo();
