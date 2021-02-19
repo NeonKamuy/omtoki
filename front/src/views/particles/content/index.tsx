@@ -4,7 +4,7 @@ import { IIndexedUser } from "../../../shared/interfaces/user";
 import { ParticleContainer } from "../../../components/canvas";
 
 export const Content: React.FC<{}> = () => {
-    const elements: IIndexedUser[] = useUsers();
+    const elements = useUsers();
 
     return (
         <div>

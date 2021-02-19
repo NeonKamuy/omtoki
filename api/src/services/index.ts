@@ -1,30 +1,47 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { IIndexedUser, IUserBase } from "shared/interfaces/user";
-import { IUserInstance, IUserModel } from "src/models/users";
+import { ObjectId } from "mongodb";
+import { IUserBase } from "shared/interfaces/user";
+import { IAGETAllUsers, IAGETPictureByUserId } from "src/controllers/users/validators";
+import { IUserModel } from "src/models/users";
 import TYPES from "src/types";
+import { docToObj } from "src/utils/db";
 
 @Injectable()
 export default class UserService {
-    constructor(@Inject(TYPES.Models.User) private readonly _UserModel: IUserModel){}
+    constructor(
+        @Inject(TYPES.Models.User) private readonly _UserModel: IUserModel
+    ) {}
 
-    public async getAll(): Promise<IIndexedUser[]> {
-        const userDocs = await this._UserModel.find();
+    public async getAll(): Promise<IAGETAllUsers> {
+        const userDocs = await this._UserModel.find({}, { picture: 0 });
         const response = UserService.toIndexedUser(userDocs);
         return response;
     }
 
-    public async addUser(args: IUserBase): Promise<IIndexedUser[]> {
+    public async getPictureByUserId(args: IAGETPictureByUserId): Promise<string> {
+        const {userId} = args;
+        const picture = await this._UserModel.findOne({_id: new ObjectId(userId)}, {picture: 1});
+        if(!picture) throw new Error("Picture Not Found");
+        return picture.picture;
+    }
+
+    public async addUser(args: IUserBase): Promise<IAGETAllUsers> {
         const userDoc = await this._UserModel.create(args);
-        const updatedUserDocs = await this._UserModel.find();
-        const response = UserService.toIndexedUser(updatedUserDocs);
+        const response = await this.getAll();
         return response;
     }
 
-    public static toIndexedUser(user: IUserInstance): IIndexedUser;
-    public static toIndexedUser(users: IUserInstance[]): IIndexedUser[];
-    public static toIndexedUser(users: (IUserInstance | IUserInstance[])): (IIndexedUser | IIndexedUser[])
-    {
-        const toIndexedUser = (e: IUserInstance) => ({ ...e.toObject(), id: e._id.toHexString() })
-        return Array.isArray(users) ? users.map(toIndexedUser) : toIndexedUser(users);
+    public static toIndexedUser<T extends {_id: ObjectId, toObject: () => any}>(user: T): T & {id: string};
+    public static toIndexedUser<T extends {_id: ObjectId}>(users: T[]): (T & {id: string})[];
+    public static toIndexedUser<T extends {_id: ObjectId}>(
+        users: T | T[]
+    ):  T & {id: string} |  (T & {id: string})[] {
+        const toIndexedUser = (e: T) => ({
+            ...docToObj(e),
+            id: e._id.toHexString(),
+        });
+        return Array.isArray(users)
+            ? users.map(toIndexedUser)
+            : toIndexedUser(users);
     }
 }

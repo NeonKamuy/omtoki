@@ -1,4 +1,4 @@
-import { IIndexedUser } from "../../../../shared/interfaces/user";
+import { IIndexedUser, IIndexedUserMeta } from "../../../../shared/interfaces/user";
 import ParticlesManager from "../particle/manager";
 import { __SETTINGS__ } from "../../settings";
 import HTMLCanvas from "./html-canvas";
@@ -6,7 +6,7 @@ import HTMLCanvas from "./html-canvas";
 export default class ParticlesCanvas extends HTMLCanvas {
     private __particles: ParticlesManager;
     
-    constructor(container: HTMLElement, elements: IIndexedUser[]) {
+    constructor(container: HTMLElement, elements: IIndexedUserMeta[]) {
         super(container);
         this.__particles = new ParticlesManager(this, elements);
         this.animate();

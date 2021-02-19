@@ -11,3 +11,6 @@ export interface IUserBase {
 export interface IIndexedUser extends IUserBase {
     id: string;
 }
+
+// Indexed User Without Picture
+export type IIndexedUserMeta = Omit<IIndexedUser, "picture">;

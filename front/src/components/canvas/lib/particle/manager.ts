@@ -2,7 +2,7 @@ import Particle from "./index";
 import ParticlesCanvas from "../canvas/index";
 import { __SETTINGS__ } from "../../settings";
 import { ICursor, IParticlesMove } from "./interfaces";
-import { IIndexedUser } from "../../../../shared/interfaces/user";
+import { IIndexedUserMeta } from "../../../../shared/interfaces/user";
 
 export default class ParticlesManager {
     private __lastHoveredParticle: Particle["id"] | null = null;
@@ -12,7 +12,7 @@ export default class ParticlesManager {
     private __particleById: Record<string, Particle | undefined> = {};
     private __particles: Particle[] = [];
 
-    constructor(canvas: ParticlesCanvas, elements: IIndexedUser[]) {
+    constructor(canvas: ParticlesCanvas, elements: IIndexedUserMeta[]) {
         this.__canvas = canvas;
         this.__move = {
             enabled: true,
@@ -22,7 +22,7 @@ export default class ParticlesManager {
         this.setNewElements(elements);
     }
 
-    public setNewElements(elements: IIndexedUser[]) {
+    public setNewElements(elements: IIndexedUserMeta[]) {
         this.__particleById = {};
         this.__particles = [];
 
@@ -94,8 +94,6 @@ export default class ParticlesManager {
                 detail: hoveredParticle,
             })
         );
-
-        console.log("***********************");
     }
 
     private mouseInteract(

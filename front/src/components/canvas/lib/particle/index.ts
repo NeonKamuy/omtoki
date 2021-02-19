@@ -1,4 +1,4 @@
-import { IIndexedUser, IUserBase } from "../../../../shared/interfaces/user";
+import { IIndexedUserMeta } from "../../../../shared/interfaces/user";
 import ParticlesCanvas from "../canvas/index";
 import { IMouseStatus } from "../canvas/interfaces";
 import { ICoordinates } from "../../interfaces";
@@ -7,7 +7,7 @@ import { IArea, ICursor } from "./interfaces";
 import * as _ from "lodash";
 
 export default class Particle {
-    public readonly data: IIndexedUser;
+    public readonly data: IIndexedUserMeta;
     private readonly __canvas: ParticlesCanvas;
     public readonly id = `${Math.floor(Math.random() * 9999)}${Date.now()}${Math.floor(Math.random() * 9999)}`;
 
@@ -21,7 +21,7 @@ export default class Particle {
     private __isBubbled = false;
     private __pulseMultiplier: 1 | -1 = 1;
 
-    constructor(args: { canvas: ParticlesCanvas; data: IIndexedUser }) {
+    constructor(args: { canvas: ParticlesCanvas; data: IIndexedUserMeta }) {
         const { canvas, data } = args;
         this.__canvas = canvas;
         this.data = data;

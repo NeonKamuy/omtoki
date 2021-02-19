@@ -17,7 +17,7 @@ export default class UserController {
         return new Promise((res, rej) => {
             axios
                 .post(`${__CONFIG__.backendURL}/users/`, args.data)
-                .then(response => {
+                .then((response) => {
                     res();
                     return response;
                 })
@@ -26,7 +26,8 @@ export default class UserController {
                         response: res,
                         cb: args.onLoaded,
                     })
-                ).catch(e => {
+                )
+                .catch((e) => {
                     alert(e);
                     throw e;
                 });

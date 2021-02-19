@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { IIndexedUser } from "../../shared/interfaces/user";
+import { IIndexedUser, IIndexedUserMeta } from "../../shared/interfaces/user";
 import { useParticles } from "./lib/hooks/w-ref-particles";
 import { __SETTINGS__ } from "./settings";
 import { useUserTooltip } from "../user-tooltip/hooks/user-tooltip";
 import "../user-tooltip/layouts/index.scss";
 import { AccountButtonContainer } from "../add-account/button-container";
 
-export const ParticleContainer = React.memo((props: { elements: IIndexedUser[] }) => {
+export const ParticleContainer = React.memo((props: { elements: IIndexedUserMeta[] }) => {
     const { elements } = props;
 
     const [setUserTooltipContainerRef] = useUserTooltip();

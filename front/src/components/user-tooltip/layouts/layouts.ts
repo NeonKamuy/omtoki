@@ -2,6 +2,7 @@ import Utils from "../../../shared/utils";
 import { __SETTINGS__ } from "../../canvas/settings";
 import Particle from "../../canvas/lib/particle";
 import { ITooltipLayouts } from "../src/interfaces";
+import { __CONFIG__ } from "../../../config";
 
 export class UserTooltipLayouts {
     public static get(particle: Particle): ITooltipLayouts {
@@ -28,7 +29,7 @@ export class UserTooltipLayouts {
                 <div class="user-tooltip-left-column">
                 
                     <div class="user-tooltip-left-top-row">
-                        <div class="user-tooltip-picture" style="background-image: url('${particle.data.picture}')"></div>
+                        <div class="user-tooltip-picture" style="background-image: url('${__CONFIG__.backendURL}/users/picture?userId=${particle.data.id}')"></div>
                     </div>
                 
                     <div class="user-tooltip-left-bottom-row">
