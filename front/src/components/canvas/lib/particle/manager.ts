@@ -61,24 +61,22 @@ export default class ParticlesManager {
                 } else {
                     moveParticle(particle);
                 }
+            } else {
+                const { isHovered } = this.mouseInteract(
+                    particle,
+                    cursor,
+                    hoveredParticle
+                );
 
-                continue;
+                if (!isHovered) {
+                    moveParticle(particle);
+                } else {
+                    // if some other particle was marked as hovered while preparing this frame
+                    // unmark it and move
+                    hoveredParticle && moveParticle(hoveredParticle);
+                    hoveredParticle = particle;
+                }
             }
-            const { isHovered } = this.mouseInteract(
-                particle,
-                cursor,
-                hoveredParticle
-            );
-
-            if (!isHovered) {
-                moveParticle(particle);
-                continue;
-            }
-
-            // if some other particle was marked as hovered while preparing this frame
-            // unmark it and move
-            hoveredParticle && moveParticle(hoveredParticle);
-            hoveredParticle = particle;
         }
 
         if (hoveredParticle) {

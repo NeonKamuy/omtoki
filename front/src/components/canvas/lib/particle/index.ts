@@ -9,7 +9,7 @@ import * as _ from "lodash";
 export default class Particle {
     public readonly data: IIndexedUser;
     private readonly __canvas: ParticlesCanvas;
-    public readonly id = `${Math.random() * 9999}${Date.now()}${Math.random() * 9999}`;
+    public readonly id = `${Math.floor(Math.random() * 9999)}${Date.now()}${Math.floor(Math.random() * 9999)}`;
 
     private __bgColor: string;
     private __coordinates: ICoordinates;

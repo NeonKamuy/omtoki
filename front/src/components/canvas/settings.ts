@@ -2,7 +2,7 @@ import { ICoordinates } from "./interfaces";
 
 export const __SETTINGS__ = {
     MAX_FPS: 20,
-    TOUCH_RADIUS: 40,
+    TOUCH_RADIUS: 20,
     HOVER_RADIUS: 10,
     MAX_USER_TOOLTIP_NAME: 24,
     MAX_USER_TOOLTIP_DESC: 85,
