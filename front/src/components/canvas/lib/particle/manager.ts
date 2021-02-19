@@ -19,17 +19,18 @@ export default class ParticlesManager {
             speed: __SETTINGS__.PARTICLE.MOVE.speed,
         };
 
-        this.__particles = elements.map((e) => {
-            const particle = new Particle({ canvas, data: e });
-            this.__particleById[particle.id] = particle;
-            return particle;
-        });
+        this.setNewElements(elements);
     }
 
     public setNewElements(elements: IIndexedUser[]) {
-        this.__particles = elements.map(
-            (e) => new Particle({ canvas: this.__canvas, data: e })
-        );
+        this.__particleById = {};
+        this.__particles = [];
+
+        for(const element of elements){
+            const particle = new Particle({ canvas: this.__canvas, data: element });
+            this.__particleById[particle.id] = particle;
+            this.__particles.push(particle);
+        }
     }
 
     public draw() {
@@ -93,6 +94,8 @@ export default class ParticlesManager {
                 detail: hoveredParticle,
             })
         );
+
+        console.log("***********************");
     }
 
     private mouseInteract(
