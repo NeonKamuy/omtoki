@@ -86,6 +86,9 @@ export const AccountModalForm: React.FC<{
                 contentClassName="account-modal-form"
             >
                 <Modal.Body className="account-modal-form body">
+                    <div className="sector top">
+                        <span onClick={toggleIsOpen}></span>
+                    </div>
                     <div className="sector">
                         <span>Карточка</span>
                     </div>

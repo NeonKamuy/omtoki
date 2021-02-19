@@ -1,6 +1,8 @@
 .user-tooltip-layout-default.interactive {
     --interactive-bgcolor: white;
     --interactive-color: white;
+    --interactive-border: 1px solid black;
+    --interactive-box-shadow:  1px -1px 0 0 black;
 
     &.user-tooltip-container {
         margin: 0;
@@ -11,15 +13,15 @@
     .user-tooltip-left-column {
         .user-tooltip-left-top-row {
             background-color: var(--interactive-bgcolor);
-            border-top: 1px solid black;
-            border-left: 1px solid black;
-            border-bottom: 1px solid black;
+            border-top: var(--interactive-border);
+            border-left:  var(--interactive-border);
+            border-bottom:  var(--interactive-border);
             cursor: pointer;
         }
 
         .user-tooltip-left-bottom-row {
             &::after {
-                box-shadow: 1px -1px 0 0 black;
+                box-shadow: var(--interactive-box-shadow);
                 z-index: 1053;
             }
 
@@ -29,7 +31,7 @@
                 height: 15px;
                 width: 15px;
                 margin-top: -2px;
-                left: 76px;
+                left: 77px;
                 border-top-right-radius: 25px;
                 background-color: var(--interactive-bgcolor);
                 transform: skewX(45deg);
@@ -42,14 +44,14 @@
     .user-tooltip-right-column {
         .user-tooltip-right-top-row {
             background-color: var(--interactive-bgcolor);
-            border-top: 1px solid black;
-            border-right: 1px solid black;
+            border-top:  var(--interactive-border);
+            border-right:  var(--interactive-border);
         }
         .user-tooltip-right-bottom-row {
             background-color: var(--interactive-bgcolor);
-            border-bottom: 1px solid black;
-            border-left: 1px solid black;
-            border-right: 1px solid black;
+            border-bottom:  var(--interactive-border);
+            border-left:  var(--interactive-border);
+            border-right:  var(--interactive-border);
         }
     }
 

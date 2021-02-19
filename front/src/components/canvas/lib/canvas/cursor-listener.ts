@@ -5,7 +5,6 @@ import { isMobile } from "react-device-detect";
 export default class CursorListener {
     private readonly __target: HTMLElement;
     private __cursorMode: ICursorMode;
-    private __openingTouch = false;
     private __lastInteraction: Date | null = null;
 
     private __status: IMouseStatus | null = null;
@@ -24,14 +23,8 @@ export default class CursorListener {
     }
 
     private handleTouch(e: TouchEvent) {
-        if (!this.__openingTouch) {
-            this.__openingTouch = true;
-            const { clientX: x, clientY: y } = e.touches[0];
-            this.__status = { coordinates: { x, y }, isMouseDown: false };
-        } else {
-            this.__openingTouch = false;
-            this.__status = null;
-        }
+        const { clientX: x, clientY: y } = e.touches[0];
+        this.__status = { coordinates: { x, y }, isMouseDown: false };
     }
 
     private handleMouseMove(e: MouseEvent) {
@@ -47,7 +40,8 @@ export default class CursorListener {
     private handleMouseLeave() {
         this.__lastInteraction = null;
 
-        setTimeout(() => {  // Smoothier mouseleave, thrembling guard 
+        setTimeout(() => {
+            // Smoothier mouseleave, thrembling guard
             if (this.__lastInteraction !== null) return;
             this.__status = null;
         }, 100);

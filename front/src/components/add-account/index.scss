@@ -22,10 +22,12 @@
     }
 }
 
+$account-modal-form-padding-X: 40px; 
+
 .account-modal-form {
     margin: auto;
     max-width: max-content;
-    padding: 40px 40px 0 40px;
+    padding: 0px $account-modal-form-padding-X 0 $account-modal-form-padding-X;
     justify-content: center;
     align-items: center;
     align-content: center;
@@ -41,7 +43,7 @@
     .sector {
         margin-bottom: 10px;
 
-        &>textarea {
+        & > textarea {
             height: 113px;
             width: 272px;
             border: 1px solid black;
@@ -80,8 +82,45 @@
                 cursor: default;
             }
 
-            &>span {
+            & > span {
                 letter-spacing: 5px;
+            }
+        }
+
+        &.top {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 0px;
+
+            & > span {
+                cursor: pointer;
+                border: 1px solid black;
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: block;
+                position: absolute;
+                right: -$account-modal-form-padding-X * 0.7;
+
+                &::before,
+                &::after {
+                    position: absolute;
+                    display: block;
+                    bottom: 50%;
+                    width: 80%;
+                    left: 10%;
+                    height: 1px;
+                    background-color: black;
+                    content: "";
+                }
+
+                &::before {
+                    transform: rotate(45deg);
+                }
+
+                &::after {
+                    transform: rotate(-45deg);
+                }
             }
         }
     }

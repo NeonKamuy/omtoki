@@ -8,6 +8,8 @@ export interface IProps {
 export interface IStyle {
     ["--interactive-color"]: string;
     ["--interactive-bgcolor"]: string;
+    ["--interactive-border"]: string;
+    ["--interactive-box-shadow"]: string;
 }
 
 export interface IUserInfo extends Pick<IUserBase, "name" | "description"> {
