@@ -1,12 +1,12 @@
 $button-width: 38px; // The width of the button area
 $button-height: $button-width; // The height of the button area
-$bar-thickness: $button-width * 0.03; // The thickness of the button bars
-$button-pad: $button-width * 0.5; // The left/right padding between button area and bars.
+$bar-thickness: $button-width * 0.05; // The thickness of the button bars
+$button-pad: $button-width * 0.35; // The left/right padding between button area and bars.
 $button-transistion-duration: 0.2s; // The transition duration
 
-$c-hamburger-line-color: black;
+$c-hamburger-line-color: white;
 $c-hamburger-active-color: white;
-$c-hamburger-circle-color: black;
+$c-hamburger-circle-color: transparent;
 $c-hamburger-active-circle-color: white;
 
 $c-hamburger--x-bgcolor: transparent;
@@ -18,7 +18,7 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
 // Base/unclicked hamburger icon
 .c-hamburger {
   border-radius: 50%;
-  z-index: 1050;
+  z-index: 1051;
   display: block;
   position: relative;
   overflow: hidden;
@@ -46,7 +46,7 @@ $c-hamburger--x-active-bgcolor-hover: rgba(0, 0, 0, $c-hamburger--x-active-opaci
   top: $button-width * 0.45833333;
   left: $button-pad * 0.5;
   right: $button-pad * 0.5;
-  height: $bar-thickness * 0.5;
+  height: $bar-thickness;
   background: $c-hamburger-line-color;
 }
 

@@ -1,4 +1,25 @@
+#logo-wrapper {
+    padding-left: 0.0375vw;
+    padding-top: 0.0375vw;   
+
+    @media(max-width: 1400px){
+        padding-left: 1.5vw;
+        padding-top: 1.5vw;
+    }
+}
+
+#burger-wrapper {
+    padding-right: 0.0375vw;
+    padding-top: 0.0375vw;   
+
+    @media(max-width: 1400px){
+        padding-right: 1.5vw;
+        padding-top: 1.5vw;
+    }
+}
+
 #logo {
-    max-width: 38px;
+    max-width: 50px;
     z-index: 1050;
 }
+

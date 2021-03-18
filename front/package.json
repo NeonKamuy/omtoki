@@ -58,5 +58,5 @@
     "@types/react-helmet": "^6.1.0",
     "@types/react-image-crop": "^8.1.2"
   },
-  "proxy": "http://localhost/3000"
+  "proxy": "http://localhost:3000"
 }

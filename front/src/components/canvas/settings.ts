@@ -15,13 +15,13 @@ export const __SETTINGS__ = {
             speed: 0.1,  // pixels to add per frame
             randCoeff: 0.2,
         },
-        ALLOWED_BGCOLORS: ["#E143FD", "#FFCC00", "#4BA468", "#EC5178", "#ADE9DF"],
+        ALLOWED_BGCOLORS: ["#00EC7B", "#00DDEB", "#8C31FF", "#F36FFF", "#FFE600"],
         COLOR_BY_BGCOLOR: {
             "#E143FD": "white",
-            "#FFCC00": "black",
+            "#FFCC00": "white",
             "#4BA468": "white",
             "#EC5178": "white",
-            "#ADE9DF": "black",
+            "#ADE9DF": "white",
         } as Record<string, "white" | "black">,
         MOVE: {
             direction: "none" as IVelocityDirection,
@@ -46,7 +46,7 @@ export const __SETTINGS__ = {
         eventOff: "usertooltipclose"
     },
     CANVAS: {
-        BGCOLOR: "#8156FB"
+        BGCOLOR: "#282828"
     }
 }
 
