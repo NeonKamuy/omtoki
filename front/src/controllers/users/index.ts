@@ -13,6 +13,14 @@ export default class UserController {
             );
     }
 
+    public static getPicture(args: IARequest<{id: string}>) {
+        axios
+            .get(`${__CONFIG__.backendURL}/users/picture/${args.data.id}`)
+            .then((res) =>
+                Requests.handleResponse({ response: res, cb: args.onLoaded })
+            );
+    }
+
     public static addUser(args: IARequest<IUserBase>): Promise<void> {
         return new Promise((res, rej) => {
             axios

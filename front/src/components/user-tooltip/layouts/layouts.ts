@@ -3,23 +3,28 @@ import { __SETTINGS__ } from "../../canvas/settings";
 import Particle from "../../canvas/lib/particle";
 import { ITooltipLayouts } from "../src/interfaces";
 import { __CONFIG__ } from "../../../config";
+import UserController from "../../../controllers/users";
 
 export class UserTooltipLayouts {
-    public static get(particle: Particle): ITooltipLayouts {
-        return {
-            default: this.getDefaultLayout(particle),
-            bottom: this.getBottomLayout(particle),
-            left: this.getLeftLayout(particle),
-            leftBottom: this.getLeftBottomLayout(particle),
-            leftTop: this.getLeftTopLayout(particle),
-            right: this.getRightLayout(particle),
-            rightBottom: this.getRightBottomLayout(particle),
-            rightTop: this.getRightTopLayout(particle),
-            top: this.getTopLayout(particle),
-        };
+    public static get(particle: Particle): Promise<ITooltipLayouts> {
+        return new Promise((res) => {
+            UserController.getPicture({ data: { id: particle.data.id }, onLoaded: picture => {
+                res({
+                    default: this.getDefaultLayout(particle, picture),
+                    bottom: this.getBottomLayout(particle),
+                    left: this.getLeftLayout(particle),
+                    leftBottom: this.getLeftBottomLayout(particle),
+                    leftTop: this.getLeftTopLayout(particle),
+                    right: this.getRightLayout(particle),
+                    rightBottom: this.getRightBottomLayout(particle),
+                    rightTop: this.getRightTopLayout(particle),
+                    top: this.getTopLayout(particle),
+                });
+            }});    
+        });
     }
 
-    private static getDefaultLayout(particle: Particle): string {
+    private static getDefaultLayout(particle: Particle, picture: string): string {
         return `
             <div class="user-tooltip-layout-default user-tooltip-container" style="
             --color: ${__SETTINGS__.PARTICLE.COLOR_BY_BGCOLOR[particle.bgColor]};
@@ -29,7 +34,7 @@ export class UserTooltipLayouts {
                 <div class="user-tooltip-left-column">
                 
                     <div class="user-tooltip-left-top-row">
-                        <div class="user-tooltip-picture" style="background-image: url('${__CONFIG__.backendURL}/users/picture/${particle.data.id}')"></div>
+                        <div class="user-tooltip-picture" style="background-image: url('${picture}')"></div>
                     </div>
                 
                     <div class="user-tooltip-left-bottom-row">

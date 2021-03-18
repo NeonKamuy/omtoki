@@ -20,12 +20,12 @@ export function useUserTooltip() {
       listenersRef.current[1]
     );
 
-    const eventOnListener = (event: any) => {
+    const eventOnListener = async (event: any) => {
       const { detail: particle } = event as CustomEvent<Particle>;
       
       show({
         coordinates: { left: particle.x, top: particle.y },
-        layouts: UserTooltipLayouts.get(particle),
+        layouts: await UserTooltipLayouts.get(particle),
       });
     };
 
