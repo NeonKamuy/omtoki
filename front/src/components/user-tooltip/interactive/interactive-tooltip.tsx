@@ -7,6 +7,7 @@ import { defaultUserInfo, filledStyle, defaultStyle } from "./constants";
 import { IUserInfo } from "./interfaces";
 import { ImageUploadModal } from "./image/image-modal";
 import { ImageCrop } from "./image/image-crop";
+import { __CONFIG__ } from "../../../config";
 
 export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
     const { onUserInfoChange } = props;
@@ -67,7 +68,7 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
                         <div
                             className="user-tooltip-picture"
                             style={{
-                                backgroundImage: `url(${info.picture})`,
+                                backgroundImage: `url(${__CONFIG__.backendURL + "/" + info.picture})`,
                             }}
                             onClick={toggleImageModalOpen}
                         />
