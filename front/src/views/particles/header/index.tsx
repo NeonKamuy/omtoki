@@ -5,7 +5,7 @@ import "./style.scss";
 
 export const Header: React.FC<{}> = React.memo(() => {
     return (
-        <Navbar className="justify-content-between" style={{ backgroundColor: "transparent" }}>
+        <Navbar className="justify-content-between p-0 m-0" style={{ backgroundColor: "transparent" }}>
             <Form inline id="logo-wrapper">
                 <img src="/logo.gif" id="logo" />
             </Form>
