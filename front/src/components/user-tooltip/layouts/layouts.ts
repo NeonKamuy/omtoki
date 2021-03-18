@@ -29,7 +29,7 @@ export class UserTooltipLayouts {
                 <div class="user-tooltip-left-column">
                 
                     <div class="user-tooltip-left-top-row">
-                        <div class="user-tooltip-picture" style="background-image: url('${__CONFIG__.backendURL}/users/picture?userId=${particle.data.id}')"></div>
+                        <div class="user-tooltip-picture" style="background-image: url('${__CONFIG__.backendURL}/users/picture/${particle.data.id}')"></div>
                     </div>
                 
                     <div class="user-tooltip-left-bottom-row">

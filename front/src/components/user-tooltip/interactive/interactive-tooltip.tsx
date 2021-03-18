@@ -68,7 +68,7 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
                         <div
                             className="user-tooltip-picture"
                             style={{
-                                backgroundImage: `url(${__CONFIG__.backendURL + "/" + info.picture})`,
+                                backgroundImage: `url(${info.picture})`,
                             }}
                             onClick={toggleImageModalOpen}
                         />
