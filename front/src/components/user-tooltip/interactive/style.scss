@@ -2,7 +2,7 @@
     --interactive-bgcolor: white;
     --interactive-color: white;
     --interactive-border: 1px solid black;
-    --interactive-box-shadow:  1px -1px 0 0 black;
+    --interactive-box-shadow: 1px -1px 0 0 black;
 
     &.user-tooltip-container {
         margin: 0;
@@ -14,8 +14,8 @@
         .user-tooltip-left-top-row {
             background-color: var(--interactive-bgcolor);
             border-top: var(--interactive-border);
-            border-left:  var(--interactive-border);
-            border-bottom:  var(--interactive-border);
+            border-left: var(--interactive-border);
+            border-bottom: var(--interactive-border);
             cursor: pointer;
         }
 
@@ -44,14 +44,14 @@
     .user-tooltip-right-column {
         .user-tooltip-right-top-row {
             background-color: var(--interactive-bgcolor);
-            border-top:  var(--interactive-border);
-            border-right:  var(--interactive-border);
+            border-top: var(--interactive-border);
+            border-right: var(--interactive-border);
         }
         .user-tooltip-right-bottom-row {
             background-color: var(--interactive-bgcolor);
-            border-bottom:  var(--interactive-border);
-            border-left:  var(--interactive-border);
-            border-right:  var(--interactive-border);
+            border-bottom: var(--interactive-border);
+            border-left: var(--interactive-border);
+            border-right: var(--interactive-border);
         }
     }
 
@@ -122,6 +122,35 @@
 
     i {
         color: black;
+    }
+}
+
+.centered-picture-camera {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .camera-rect {
+        width: 60%;
+        height: 35%;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .camera-circle {
+        width: 13px;
+        height: 13px;
+        border: 1px solid black;
+        border-radius: 100%;
+        margin: 0 auto;
     }
 }
 

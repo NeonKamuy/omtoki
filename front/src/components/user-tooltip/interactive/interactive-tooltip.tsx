@@ -77,8 +77,10 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
                             className="user-tooltip-picture"
                             onClick={toggleImageModalOpen}
                         >
-                            <div className="centered-picture-arrow">
-                                <i className="gg-arrow-down"></i>
+                            <div className="centered-picture-camera">
+                                <div className="camera-rect">
+                                    <div className="camera-circle" />
+                                </div>
                             </div>
                         </div>
                     )}
