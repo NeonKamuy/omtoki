@@ -156,3 +156,25 @@ $account-modal-form-padding-X: 40px;
 #card-overlay {
     margin-left: 55px;
 }
+
+.registration-success-modal {
+    background-color: black;
+    color: white;
+    font-family: "sf-pro-display";
+
+    #image-container {
+        display: flex;
+        justify-content: center;
+        & > img {
+            border-radius: 50%;
+            width: 100px;
+            border: 8px solid #8c30ff;
+        }
+    }
+
+    & div {
+        padding: 10px 10px;
+        max-width: 230px;
+        margin: 0 auto;
+    }
+}

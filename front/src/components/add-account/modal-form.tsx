@@ -1,14 +1,9 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { Modal, InputGroup, FormControl, Spinner } from "react-bootstrap";
 import UserController from "../../controllers/users";
 import "./index.scss";
 import { UserInteractiveTooltip } from "../user-tooltip/interactive/interactive-tooltip";
-import {
-    defaultTooltipStatus,
-    ErrorTooltips,
-    fullTooltipStatus,
-    ITooltipStatus,
-} from "./error-tooltips";
+import { defaultTooltipStatus, ErrorTooltips } from "./error-tooltips";
 import { useElementRefs, useTooltipStatus, useUserInfo } from "./hooks";
 
 export const AccountModalForm: React.FC<{
@@ -26,10 +21,12 @@ export const AccountModalForm: React.FC<{
         resetTooltip,
     } = useTooltipStatus();
 
-    const handleToggleIsOpen = useCallback(()=>{
+    const handleToggleIsOpen = useCallback(() => {
         toggleIsOpen();
         resetTooltip();
-    }, [])
+    }, []);
+
+    const [successOpen, setSuccessOpen] = useState(false);
 
     const handleSubmit = useCallback((args) => {
         const newTooltipStatus = { ...defaultTooltipStatus };
@@ -48,7 +45,7 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showCard = true;
             error = true;
         }
-        
+
         if (!skills) {
             newTooltipStatus.showSkill = true;
             error = true;
@@ -57,7 +54,7 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showTg = true;
             error = true;
         }
-        if(!userInfo.picture){
+        if (!userInfo.picture) {
             newTooltipStatus.showPhoto = true;
             error = true;
         }
@@ -78,7 +75,10 @@ export const AccountModalForm: React.FC<{
                 skills,
                 tg,
             },
-            onLoaded: () => window.location.reload(),
+            onLoaded: () => {
+                setSuccessOpen(true);
+                setTimeout(() => window.location.reload(), 5000);
+            },
         }).finally(() => setIsLoading(false));
     }, []);
 
@@ -151,6 +151,23 @@ export const AccountModalForm: React.FC<{
                 </Modal.Body>
             </Modal>
             <ErrorTooltips refs={refs} show={tooltipStatus} />
+            {successOpen && (
+                <Modal
+                    show={isOpen}
+                    size="sm"
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    contentClassName="registration-success-modal"
+                    backdrop="static"
+                >
+                    <div>
+                        <div id="image-container">
+                            <img src={userInfoRef.current.picture!} />
+                        </div>
+                        <div>Поздравляем! Вы удачно вступили в сообщество</div>
+                    </div>
+                </Modal>
+            )}
         </>
     );
 };
