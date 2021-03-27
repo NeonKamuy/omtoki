@@ -3,6 +3,7 @@ import { IUserBase } from "../../../shared/interfaces/user";
 export interface IProps {
     onUserInfoChange: (info: IUserInfo) => void;
     parentIsVisible: boolean;
+    photoRef?: React.LegacyRef<HTMLDivElement> ;
 }
 
 export interface IStyle {

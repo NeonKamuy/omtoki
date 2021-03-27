@@ -19,12 +19,17 @@ export const AccountModalForm: React.FC<{
     const [isLoading, setIsLoading] = useState(false);
 
     const refs = useElementRefs();
-    const { cardRef, skillRef, tgRef } = refs;
+    const { cardRef, skillRef, tgRef, photoRef } = refs;
     const {
         tooltipStatus,
         setTooltipTimeout,
         resetTooltip,
     } = useTooltipStatus();
+
+    const handleToggleIsOpen = useCallback(()=>{
+        toggleIsOpen();
+        resetTooltip();
+    }, [])
 
     const handleSubmit = useCallback((args) => {
         const newTooltipStatus = { ...defaultTooltipStatus };
@@ -43,12 +48,17 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showCard = true;
             error = true;
         }
+        
         if (!skills) {
             newTooltipStatus.showSkill = true;
             error = true;
         }
         if (!tg) {
             newTooltipStatus.showTg = true;
+            error = true;
+        }
+        if(!userInfo.picture){
+            newTooltipStatus.showPhoto = true;
             error = true;
         }
 
@@ -81,13 +91,13 @@ export const AccountModalForm: React.FC<{
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
-                onHide={toggleIsOpen}
+                onHide={handleToggleIsOpen}
                 className="account-modal"
                 contentClassName="account-modal-form"
             >
                 <Modal.Body className="account-modal-form body">
                     <div className="sector top">
-                        <span onClick={toggleIsOpen}></span>
+                        <span onClick={handleToggleIsOpen}></span>
                     </div>
                     <div className="sector">
                         <span>Карточка</span>
@@ -96,6 +106,7 @@ export const AccountModalForm: React.FC<{
                         <UserInteractiveTooltip
                             onUserInfoChange={setUserInfo}
                             parentIsVisible={isOpen}
+                            photoRef={photoRef}
                         />
                     </div>
                     <div className="sector">

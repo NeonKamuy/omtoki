@@ -10,7 +10,7 @@ import { ImageCrop } from "./image/image-crop";
 import { __CONFIG__ } from "../../../config";
 
 export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
-    const { onUserInfoChange } = props;
+    const { onUserInfoChange, photoRef } = props;
     const parentIsVisibleRef = useRef(props.parentIsVisible);
     parentIsVisibleRef.current = props.parentIsVisible;
 
@@ -63,7 +63,7 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
             style={style as any}
         >
             <div className="user-tooltip-left-column">
-                <div className="user-tooltip-left-top-row" style={style as any}>
+                <div className="user-tooltip-left-top-row" style={style as any} ref={photoRef}>
                     {info.picture ? (
                         <div
                             className="user-tooltip-picture"

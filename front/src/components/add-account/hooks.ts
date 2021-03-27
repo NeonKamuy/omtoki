@@ -4,14 +4,15 @@ import { ITooltipStatus } from "./error-tooltips";
 import { defaultTooltipStatus } from "./error-tooltips";
 
 export function useElementRefs(): Record<
-    "cardRef" | "skillRef" | "tgRef",
+    "cardRef" | "skillRef" | "tgRef" | "photoRef",
     React.MutableRefObject<any>
 > {
     const cardRef = useRef(null);
     const skillRef = useRef(null);
     const tgRef = useRef(null);
+    const photoRef = useRef(null);
 
-    return { cardRef, skillRef, tgRef };
+    return { cardRef, skillRef, tgRef, photoRef };
 }
 
 export function useUserInfo() {
@@ -40,7 +41,7 @@ export function useTooltipStatus() {
             if (tooltipTimeoutRef.current !== newId) return;
             setTooltipStatus(defaultTooltipStatus);
             tooltipTimeoutRef.current = null;
-        }, 10000) as any) as number;
+        }, 3000) as any) as number;
 
         tooltipTimeoutRef.current = newId;
         setTooltipStatus(newStatus);
