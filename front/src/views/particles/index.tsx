@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { LeftBottomLabel } from "../../components/left-bottom-label";
 import { Content } from "./content";
 import { ModalContext } from "./context/modal-context";
 import { Header } from "./header";
@@ -13,6 +14,7 @@ export const ParticlesView: React.FC<{}> = () => {
         <ModalContext.Provider value={modalContextValue}>
             <Header />
             <Content />
+            <LeftBottomLabel />
         </ModalContext.Provider>
     );
 };

@@ -25,15 +25,11 @@ export const AccountModalButton: React.FC<{}> = React.memo(() => {
         });
     }, [setIsOpen]);
 
-
     return (
         <>
-            <span
-                id="account-modal-trigger"
-                onClick={toggleIsOpen}
-            >
-                Вступить
-            </span>
+            <div id="account-modal-trigger" onClick={toggleIsOpen}>
+                <span>Вступить</span>
+            </div>
 
             <AccountModalForm isOpen={isOpen} toggleIsOpen={toggleIsOpen} />
         </>

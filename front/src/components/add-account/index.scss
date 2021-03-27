@@ -1,24 +1,34 @@
 #account-modal-trigger {
-    color: white;
+    width: 250px;
+    height: 44px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    background-color: white;
+    letter-spacing: 5px;
     font-size: 18px;
-    text-decoration: underline;
+    font-family: sf-pro-display;
     cursor: pointer;
 }
 
 #account-button-container {
     color: white;
     position: absolute;
-    right: 30%;
-    top: 50%;
+    right: 50px;
+    bottom: 50px;
     width: 250px;
-    font-family: "cera-pro";
+    font-family: "sf-pro-display";
 
-    @media (max-width: 1400px) {
-        right: 15%;
+    @media(max-width: 1400px) {
+        right: 36px;
+        bottom: 36px;
     }
 
     @media (max-width: 650px) {
-        right: 5%;
+        left: 36px;
+        bottom: 36px;
     }
 }
 
@@ -38,7 +48,7 @@ $account-modal-form-padding-X: 40px;
     margin: 0;
     height: 600px;
     width: 360px;
-    font-family: "cera-pro";
+    font-family: "sf-pro-display";
 
     .sector {
         margin-bottom: 10px;
@@ -70,8 +80,8 @@ $account-modal-form-padding-X: 40px;
 
         &.submit {
             margin-top: 25px;
-            height: 40px;
-            background-color: black;
+            height: 44px;
+            background-color: #2B2B2B;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,6 +94,14 @@ $account-modal-form-padding-X: 40px;
 
             & > span {
                 letter-spacing: 5px;
+            }
+
+            &:hover {
+                background-color: #3C3C3C;
+            }
+
+            &:active {
+                background-color: #1A1A1A;
             }
         }
 
