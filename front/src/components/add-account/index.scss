@@ -1,16 +1,24 @@
 #account-modal-trigger {
-    width: 250px;
+    width: 254px;
     height: 44px;
     margin-top: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: black;
-    background-color: white;
+    background-color: #F6F6F6;
     letter-spacing: 5px;
-    font-size: 18px;
+    font-size: 12px;
     font-family: sf-pro-display;
+    text-transform: uppercase;
     cursor: pointer;
+
+    &:hover {
+        background-color: #E2E2E2;
+    }
+    &:active {
+        background-color: #C4C4C4;
+    }
 }
 
 #account-button-container {
@@ -29,6 +37,11 @@
     @media (max-width: 650px) {
         left: 36px;
         bottom: 36px;
+    }
+
+    & > span.slogan {
+        font-size: 16px;
+        font-family: "sf-pro-display light";
     }
 }
 
