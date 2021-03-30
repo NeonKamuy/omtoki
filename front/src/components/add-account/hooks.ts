@@ -41,7 +41,7 @@ export function useTooltipStatus() {
             if (tooltipTimeoutRef.current !== newId) return;
             setTooltipStatus(defaultTooltipStatus);
             tooltipTimeoutRef.current = null;
-        }, 3000) as any) as number;
+        }, 5000) as any) as number;
 
         tooltipTimeoutRef.current = newId;
         setTooltipStatus(newStatus);
