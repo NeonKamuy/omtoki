@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { IUserInfo } from "../user-tooltip/interactive/interfaces";
-import { ITooltipStatus } from "./error-tooltips";
-import { defaultTooltipStatus } from "./error-tooltips";
+import { ITooltipStatus } from "./modal-form/ErrorTooltips";
+import { defaultTooltipStatus } from "./modal-form/ErrorTooltips";
 
 export function useElementRefs(): Record<
     "cardRef" | "skillRef" | "tgRef" | "photoRef",

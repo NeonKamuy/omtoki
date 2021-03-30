@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
 import { ModalContext } from "../../views/particles/context/modal-context";
 import "./index.scss";
-import { AccountModalForm } from "./modal-form";
+import { AccountModalForm } from "./modal-form/AccountModalForm";
 
 export const AccountModalButton: React.FC<{}> = React.memo(() => {
     const [isOpen, setIsOpen] = useState(false);

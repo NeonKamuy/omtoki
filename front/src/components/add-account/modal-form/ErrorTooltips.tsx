@@ -1,6 +1,6 @@
 import React from "react";
 import { Overlay, Tooltip } from "react-bootstrap";
-import { useElementRefs } from "./hooks";
+import { useElementRefs } from "../hooks";
 
 export const ErrorTooltips: React.FC<IProps> = (props) => {
     const { cardRef, skillRef, tgRef, photoRef } = props.refs;
