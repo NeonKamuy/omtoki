@@ -1,158 +1,199 @@
 #account-modal-trigger {
-    width: 250px;
-    height: 44px;
-    margin-top: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: black;
-    background-color: white;
-    letter-spacing: 5px;
-    font-size: 18px;
-    font-family: sf-pro-display;
-    cursor: pointer;
+  width: 254px;
+  height: 44px;
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: #f6f6f6;
+  letter-spacing: 5px;
+  font-size: 12px;
+  font-family: sf-pro-display;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e2e2e2;
+  }
+  &:active {
+    background-color: #c4c4c4;
+  }
 }
 
 #account-button-container {
-    color: white;
-    position: absolute;
-    right: 50px;
+  color: white;
+  position: absolute;
+  right: 50px;
+  width: 250px;
+  font-family: "sf-pro-display";
+
+  @media (max-width: 650px) {
+    left: 36px;
+    top: calc(var(--windowInnerHeight) - 36px);
+    transform: translateY(-100%);
+  }
+
+  @media (min-width: 650px) and (max-width: 1400px) {
+    right: 36px;
+    bottom: 36px;
+  }
+
+  @media(min-width: 1400px) {
     bottom: 50px;
-    width: 250px;
-    font-family: "sf-pro-display";
+  }
 
-    @media (max-width: 1400px) {
-        right: 36px;
-        bottom: 36px;
-    }
-
-    @media (max-width: 650px) {
-        left: 36px;
-        bottom: 36px;
-    }
+  & > span.slogan {
+    font-size: 16px;
+    font-family: "sf-pro-display light";
+  }
 }
 
-$account-modal-form-padding-X: 40px;
+$account-modal-form-padding: 20px;
 
 .account-modal-form {
-    margin: auto;
-    max-width: max-content;
-    padding: 0px $account-modal-form-padding-X 0 $account-modal-form-padding-X;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  margin: auto;
+  max-width: max-content;
+  padding: $account-modal-form-padding;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
 
 .account-modal-form.body {
-    padding: 0;
-    margin: 0;
-    height: 600px;
-    width: 360px;
-    font-family: "sf-pro-display";
+  padding: 0;
+  margin: 0;
+  width: 360px;
+  font-family: "sf-pro-display";
 
-    .sector {
-        margin-bottom: 10px;
+  .sector {
+    margin-bottom: 10px;
 
-        & > textarea {
-            height: 113px;
-            width: 272px;
-            border: 1px solid black;
-            resize: none;
-            padding: 12px 14px 12px 14px;
-        }
-
-        .tg-input-group {
-            border: 1px solid black;
-            max-width: 100%;
-
-            .tg-input-prepend,
-            .tg-input {
-                border: none;
-                background-color: transparent;
-
-                &:active,
-                &:focus {
-                    border: none;
-                    box-shadow: none;
-                }
-            }
-        }
-
-        &.submit {
-            margin-top: 25px;
-            height: 44px;
-            background-color: #2b2b2b;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            cursor: pointer;
-
-            &.loading {
-                cursor: default;
-            }
-
-            & > span {
-                letter-spacing: 5px;
-            }
-
-            &:hover {
-                background-color: #3c3c3c;
-            }
-
-            &:active {
-                background-color: #1a1a1a;
-            }
-        }
-
-        &.top {
-            display: flex;
-            justify-content: flex-end;
-            padding: 10px 0px;
-
-            & > span {
-                cursor: pointer;
-                border: 1px solid black;
-                border-radius: 50%;
-                width: 36px;
-                height: 36px;
-                display: block;
-                position: absolute;
-                right: -$account-modal-form-padding-X * 0.7;
-
-                &::before,
-                &::after {
-                    position: absolute;
-                    display: block;
-                    bottom: 50%;
-                    width: 80%;
-                    left: 10%;
-                    height: 1px;
-                    background-color: black;
-                    content: "";
-                }
-
-                &::before {
-                    transform: rotate(45deg);
-                }
-
-                &::after {
-                    transform: rotate(-45deg);
-                }
-            }
-        }
+    & > textarea {
+      height: 113px;
+      width: 272px;
+      border: 1px solid black;
+      resize: none;
+      padding: 12px 14px 12px 14px;
     }
+
+    .tg-input-group {
+      border: 1px solid black;
+      max-width: 100%;
+
+      .tg-input-prepend,
+      .tg-input {
+        border: none;
+        background-color: transparent;
+
+        &:active,
+        &:focus {
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
+
+    &.submit {
+      margin-top: 25px;
+      height: 44px;
+      background-color: #2b2b2b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 12px;
+
+      &.loading {
+        cursor: default;
+      }
+
+      & > span {
+        letter-spacing: 5px;
+      }
+
+      &:hover {
+        background-color: #3c3c3c;
+      }
+
+      &:active {
+        background-color: #1a1a1a;
+      }
+    }
+
+    &.top {
+      display: flex;
+      justify-content: flex-end;
+
+      & > span {
+        cursor: pointer;
+        border: 1px solid black;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: block;
+        position: absolute;
+        top: -$account-modal-form-padding * 0.5;
+        right: -$account-modal-form-padding * 0.5;
+
+        &::before,
+        &::after {
+          position: absolute;
+          display: block;
+          bottom: 50%;
+          width: 80%;
+          left: 10%;
+          height: 1px;
+          background-color: black;
+          content: "";
+        }
+
+        &::before {
+          transform: rotate(45deg);
+        }
+
+        &::after {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
 }
 
 .bs-tooltip-top .arrow::before {
-    border-width: 0.4rem 0.2rem 0;
-    border-color: inherit;
+  border-width: 0.4rem 0.2rem 0;
+  border-color: inherit;
 }
 
 .tooltip-inner {
-    border-radius: 0;
+  border-radius: 0;
 }
 
 #card-overlay {
-    margin-left: 55px;
+  margin-left: 55px;
+}
+
+.registration-success-modal {
+  background-color: black;
+  color: white;
+  font-family: "sf-pro-display";
+
+  #image-container {
+    display: flex;
+    justify-content: center;
+    & > img {
+      border-radius: 50%;
+      width: 100px;
+      border: 8px solid #8c30ff;
+    }
+  }
+
+  & div {
+    padding: 10px 10px;
+    max-width: 230px;
+    margin: 0 auto;
+  }
 }

@@ -4,7 +4,7 @@ import "./style.scss";
 export const LeftBottomLabel: React.FC<{}> = ()=> {
     return (
         <div id="left-bottom-label">
-            Polyana<br />It
+            <img src={"/bottom_left_label.svg"} />
         </div>
     )
 }

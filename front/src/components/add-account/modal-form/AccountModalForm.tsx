@@ -1,15 +1,13 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { Modal, InputGroup, FormControl, Spinner } from "react-bootstrap";
-import UserController from "../../controllers/users";
-import "./index.scss";
-import { UserInteractiveTooltip } from "../user-tooltip/interactive/interactive-tooltip";
-import {
-    defaultTooltipStatus,
-    ErrorTooltips,
-    fullTooltipStatus,
-    ITooltipStatus,
-} from "./error-tooltips";
-import { useElementRefs, useTooltipStatus, useUserInfo } from "./hooks";
+import UserController from "../../../controllers/users";
+import "../index.scss";
+import { UserInteractiveTooltip } from "../../user-tooltip/interactive/interactive-tooltip";
+import { defaultTooltipStatus, ErrorTooltips } from "./ErrorTooltips";
+import { useElementRefs, useTooltipStatus, useUserInfo } from "../hooks";
+import { TelegramInput } from "./TelegramInput";
+import { SubmitButton } from "./SubmitButton";
+import { SuccessModal } from "./SuccessModal";
 
 export const AccountModalForm: React.FC<{
     isOpen: boolean;
@@ -26,12 +24,14 @@ export const AccountModalForm: React.FC<{
         resetTooltip,
     } = useTooltipStatus();
 
-    const handleToggleIsOpen = useCallback(()=>{
+    const handleToggleIsOpen = useCallback(() => {
         toggleIsOpen();
         resetTooltip();
-    }, [])
+    }, []);
 
-    const handleSubmit = useCallback((args) => {
+    const [successOpen, setSuccessOpen] = useState(false);
+
+    const handleSubmit = useCallback(() => {
         const newTooltipStatus = { ...defaultTooltipStatus };
         const userInfo = userInfoRef.current;
 
@@ -48,7 +48,7 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showCard = true;
             error = true;
         }
-        
+
         if (!skills) {
             newTooltipStatus.showSkill = true;
             error = true;
@@ -57,7 +57,7 @@ export const AccountModalForm: React.FC<{
             newTooltipStatus.showTg = true;
             error = true;
         }
-        if(!userInfo.picture){
+        if (!userInfo.picture) {
             newTooltipStatus.showPhoto = true;
             error = true;
         }
@@ -78,7 +78,10 @@ export const AccountModalForm: React.FC<{
                 skills,
                 tg,
             },
-            onLoaded: () => window.location.reload(),
+            onLoaded: () => {
+                setSuccessOpen(true);
+                setTimeout(() => window.location.reload(), 5000);
+            },
         }).finally(() => setIsLoading(false));
     }, []);
 
@@ -118,39 +121,12 @@ export const AccountModalForm: React.FC<{
                             placeholder="Например - Java, SQL, Ruby"
                         ></textarea>
                     </div>
-                    <div className="sector">
-                        <span>Телеграм</span>
-                    </div>
-                    <div className="sector">
-                        <InputGroup className="tg-input-group">
-                            <InputGroup.Prepend>
-                                <InputGroup.Text className="tg-input-prepend">
-                                    @
-                                </InputGroup.Text>
-                            </InputGroup.Prepend>
-                            <FormControl ref={tgRef} className="tg-input" />
-                        </InputGroup>
-                    </div>
-                    {isLoading ? (
-                        <div className="sector submit loading">
-                            <Spinner
-                                as="span"
-                                animation="grow"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                                style={{ marginRight: 10 }}
-                            />
-                            <span>Отправка...</span>
-                        </div>
-                    ) : (
-                        <div className="sector submit" onClick={handleSubmit}>
-                            <span>Вступить</span>
-                        </div>
-                    )}
+                    <TelegramInput ref={tgRef} />
+                    <SubmitButton isLoading={isLoading} onSubmit={handleSubmit} />
                 </Modal.Body>
             </Modal>
             <ErrorTooltips refs={refs} show={tooltipStatus} />
+            <SuccessModal isOpen={isOpen && successOpen} picture={userInfoRef.current.picture} />
         </>
     );
 };
