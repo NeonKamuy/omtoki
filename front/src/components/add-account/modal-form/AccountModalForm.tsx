@@ -11,6 +11,7 @@ import { SuccessModal } from "./SuccessModal";
 import { DESCRIPTION_SYMBOL_LIMIT } from "./constants";
 import { UserCardInteractive } from "./UserCardInteractive";
 import { IUserInfo } from "../../user-tooltip/interactive/interfaces";
+import { SkillInput } from "./SkillInput";
 
 export const AccountModalForm: React.FC<{
     isOpen: boolean;
@@ -90,11 +91,6 @@ export const AccountModalForm: React.FC<{
 
     const { setUserInfo, userInfoRef } = useUserInfo();
 
-    const handleUserInfoChange = useCallback((userInfo: IUserInfo)=>{
-        if(userInfo.description.length>DESCRIPTION_SYMBOL_LIMIT) return;
-        setUserInfo(userInfo);
-    }, []);
-
     return (
         <>
             <Modal
@@ -114,18 +110,10 @@ export const AccountModalForm: React.FC<{
                         parentIsVisible={true}
                         photoRef={photoRef}
                         cardRef={cardRef}
-                        setUserInfo={handleUserInfoChange}
+                        setUserInfo={setUserInfo}
                         userInfo={userInfoRef.current}
                     />
-                    <div className="sector">
-                        <span>Навыки</span>
-                    </div>
-                    <div className="sector">
-                        <textarea
-                            ref={skillRef}
-                            placeholder="Например - Java, SQL, Ruby"
-                        ></textarea>
-                    </div>
+                    <SkillInput ref={skillRef} />
                     <TelegramInput ref={tgRef} />
                     <SubmitButton
                         isLoading={isLoading}

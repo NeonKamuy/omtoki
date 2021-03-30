@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { UserInteractiveTooltip } from "../../user-tooltip/interactive/interactive-tooltip";
 import { IUserInfo } from "../../user-tooltip/interactive/interfaces";
 import { DESCRIPTION_SYMBOL_LIMIT } from "./constants";
@@ -7,6 +7,11 @@ export const UserCardInteractive: React.FC<IUserCardInteractive> = (props) => {
     const {setUserInfo, parentIsVisible, photoRef} = props;
     const {cardRef, userInfo} = props;
 
+    const handleUserInfoChange = useCallback((userInfo: IUserInfo)=>{
+        if(userInfo.description.length>DESCRIPTION_SYMBOL_LIMIT) return;
+        setUserInfo(userInfo);
+    }, [setUserInfo]);
+
     return (
         <>
             <div className="sector">
@@ -14,7 +19,7 @@ export const UserCardInteractive: React.FC<IUserCardInteractive> = (props) => {
             </div>
             <div className="sector" ref={cardRef}>
                 <UserInteractiveTooltip
-                    onUserInfoChange={setUserInfo}
+                    onUserInfoChange={handleUserInfoChange}
                     parentIsVisible={parentIsVisible}
                     photoRef={photoRef}
                     userInfo={userInfo}
