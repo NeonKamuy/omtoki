@@ -8,6 +8,9 @@ import { useElementRefs, useTooltipStatus, useUserInfo } from "../hooks";
 import { TelegramInput } from "./TelegramInput";
 import { SubmitButton } from "./SubmitButton";
 import { SuccessModal } from "./SuccessModal";
+import { DESCRIPTION_SYMBOL_LIMIT } from "./constants";
+import { UserCardInteractive } from "./UserCardInteractive";
+import { IUserInfo } from "../../user-tooltip/interactive/interfaces";
 
 export const AccountModalForm: React.FC<{
     isOpen: boolean;
@@ -87,6 +90,11 @@ export const AccountModalForm: React.FC<{
 
     const { setUserInfo, userInfoRef } = useUserInfo();
 
+    const handleUserInfoChange = useCallback((userInfo: IUserInfo)=>{
+        if(userInfo.description.length>DESCRIPTION_SYMBOL_LIMIT) return;
+        setUserInfo(userInfo);
+    }, []);
+
     return (
         <>
             <Modal
@@ -102,16 +110,13 @@ export const AccountModalForm: React.FC<{
                     <div className="sector top">
                         <span onClick={handleToggleIsOpen}></span>
                     </div>
-                    <div className="sector">
-                        <span>Карточка</span>
-                    </div>
-                    <div className="sector" ref={cardRef}>
-                        <UserInteractiveTooltip
-                            onUserInfoChange={setUserInfo}
-                            parentIsVisible={isOpen}
-                            photoRef={photoRef}
-                        />
-                    </div>
+                    <UserCardInteractive
+                        parentIsVisible={true}
+                        photoRef={photoRef}
+                        cardRef={cardRef}
+                        setUserInfo={handleUserInfoChange}
+                        userInfo={userInfoRef.current}
+                    />
                     <div className="sector">
                         <span>Навыки</span>
                     </div>
@@ -122,11 +127,17 @@ export const AccountModalForm: React.FC<{
                         ></textarea>
                     </div>
                     <TelegramInput ref={tgRef} />
-                    <SubmitButton isLoading={isLoading} onSubmit={handleSubmit} />
+                    <SubmitButton
+                        isLoading={isLoading}
+                        onSubmit={handleSubmit}
+                    />
                 </Modal.Body>
             </Modal>
             <ErrorTooltips refs={refs} show={tooltipStatus} />
-            <SuccessModal isOpen={isOpen && successOpen} picture={userInfoRef.current.picture} />
+            <SuccessModal
+                isOpen={isOpen && successOpen}
+                picture={userInfoRef.current.picture}
+            />
         </>
     );
 };
