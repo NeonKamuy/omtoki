@@ -36,7 +36,7 @@
 
   @media (max-width: 650px) {
     left: 36px;
-    bottom: 36px;
+    bottom: calc(var(--windowInnerHeight) - var(--windowInnerHeight) + 36px);
   }
 
   & > span.slogan {

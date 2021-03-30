@@ -1,16 +1,17 @@
 $--breakpoint-sm: 576px;
 
 .burger-modal {
-    background-color: black;
     opacity: 0.9;
 
     & .modal-content {
         background-color: transparent;
+        border: none;
     }
 }
 
 .burger-list-group {
     background-color: transparent;
+    border: none;
     color: white;
 
     & .list-group-item {
@@ -19,6 +20,7 @@ $--breakpoint-sm: 576px;
             font-size: 23px;
         }
 
+        border: none;
         background-color: transparent;
         line-height: 1.5em;
         font-weight: 700;

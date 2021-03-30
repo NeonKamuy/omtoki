@@ -1,5 +1,8 @@
 html, body, #root {
-    height: 100%;
+    /** Can be overriden for better responsibility **/
+    --windowInnerHeight: 100vh;
+    
+    height: var(--windowInnerHeight);
     margin: 0;
     padding: 0;
 }
