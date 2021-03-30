@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet";
 const App = () => {
   const [innerHeight, setInnerHeight] = useState(window.innerHeight + "px");
 
-  alert(innerHeight);
   useLayoutEffect(() => {
     const updateSize = () => setInnerHeight(window.innerHeight + "px");
     window.addEventListener("resize", updateSize);

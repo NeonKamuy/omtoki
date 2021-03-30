@@ -25,18 +25,22 @@
   color: white;
   position: absolute;
   right: 50px;
-  bottom: 50px;
   width: 250px;
   font-family: "sf-pro-display";
 
-  @media (max-width: 1400px) {
+  @media (max-width: 650px) {
+    left: 36px;
+    top: calc(var(--windowInnerHeight) - 36px);
+    transform: translateY(-100%);
+  }
+
+  @media (min-width: 650px) and (max-width: 1400px) {
     right: 36px;
     bottom: 36px;
   }
 
-  @media (max-width: 650px) {
-    left: 36px;
-    bottom: calc(var(--windowInnerHeight) - var(--windowInnerHeight) + 36px);
+  @media(min-width: 1400px) {
+    bottom: 50px;
   }
 
   & > span.slogan {
