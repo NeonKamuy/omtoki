@@ -10,11 +10,10 @@ import { ImageCrop } from "./image/image-crop";
 import { __CONFIG__ } from "../../../config";
 
 export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
-    const { onUserInfoChange, photoRef } = props;
+    const { onUserInfoChange, photoRef, userInfo: info } = props;
     const parentIsVisibleRef = useRef(props.parentIsVisible);
     parentIsVisibleRef.current = props.parentIsVisible;
 
-    const [info, setInfo] = useState<IUserInfo>(defaultUserInfo);
     const infoRef = useRef(info);
     infoRef.current = info;
 
@@ -29,14 +28,12 @@ export const UserInteractiveTooltip: React.FC<IProps> = (props) => {
     }, []);
 
     const handleInput = useCallback((key: string, value: string) => {
-        setInfo((e) => {
-            const newState = {
-                ...e,
-                [key]: value,
-            };
-            onUserInfoChange(newState);
-            return newState;
-        });
+        const newInfo = {
+            ...infoRef.current,
+            [key]: value
+        };
+
+        onUserInfoChange(newInfo);
     }, []);
 
     const [imageModalOpen, setImageModalOpen] = useState(false);
