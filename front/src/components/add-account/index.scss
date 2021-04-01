@@ -1,18 +1,24 @@
 #account-modal-trigger {
   width: 254px;
   height: 44px;
-  margin-top: 24px;
+  margin: 24px auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: black;
-  background-color: #f6f6f6;
+  color: white;
+  background-color: transparent;
+  border: 1px solid #f6f6f6;
+  border-radius: 50px;
   letter-spacing: 5px;
   font-size: 12px;
   font-family: sf-pro-display;
   text-transform: uppercase;
   cursor: pointer;
 
+  &:hover,
+  &:active {
+    color: black;
+  }
   &:hover {
     background-color: #e2e2e2;
   }
@@ -25,7 +31,7 @@
   color: white;
   position: absolute;
   right: 50px;
-  width: 250px;
+  width: 290px;
   font-family: "sf-pro-display";
 
   @media (max-width: 650px) {
@@ -39,13 +45,18 @@
     bottom: 36px;
   }
 
-  @media(min-width: 1400px) {
+  @media (min-width: 1400px) {
     bottom: 50px;
   }
 
   & > span.slogan {
     font-size: 16px;
     font-family: "sf-pro-display light";
+  }
+
+  & > span.mention {
+    font-size: 13px;
+    color: rgb(160, 160, 160);
   }
 }
 
