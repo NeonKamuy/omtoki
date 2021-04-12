@@ -13,7 +13,6 @@ import { Response } from "express";
 import * as tmp from "tmp";
 import * as fs from "fs";
 
-
 @Controller("/api/users")
 export class UserController {
     constructor(private readonly _UserService: UserService) {}
@@ -29,15 +28,24 @@ export class UserController {
         @wValidatedArg(AGETPictureByUserIdSchema) args: IAGETPictureByUserId,
         @Res() res: Response
     ) {
-        const picture = await this._UserService.getPictureByUserId(args);
-        const buffer = Buffer.from(picture.replace(/^data:image\/[a-z]+;base64,/, ""), "base64");
-        tmp.dir({}, (e, tempDir)=>{
+        const {
+            picture,
+            updatedAt,
+        } = await this._UserService.getPictureByUserId(args);
+
+        res.header("Last-Modified", new Date(updatedAt).toUTCString());
+        const buffer = Buffer.from(
+            picture.replace(/^data:image\/[a-z]+;base64,/, ""),
+            "base64"
+        );
+
+        tmp.dir({}, (e, tempDir) => {
             const filename = `${tempDir}/${Date.now() + args.userId}`;
-            fs.writeFile(filename, buffer, ()=>{
+            fs.writeFile(filename, buffer, () => {
                 res.sendFile(filename);
-                res.once("finish", ()=>{
-                    fs.unlink(filename, ()=>{});
-                })
+                res.once("finish", () => {
+                    fs.unlink(filename, () => {});
+                });
             });
         });
     }

@@ -1,7 +1,8 @@
 #account-modal-trigger {
   width: 254px;
   height: 44px;
-  margin: 24px auto;
+  margin-top: 24px;
+  margin-bottom: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +51,6 @@
 
   & > div.slogan {
     width: 254px;
-    margin: 0 auto;
     font-size: 16px;
     font-family: "sf-pro-display light";
   }

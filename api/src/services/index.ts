@@ -1,7 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ObjectId } from "mongodb";
 import { IUserBase } from "shared/interfaces/user";
-import { IAGETAllUsers, IAGETPictureByUserId } from "src/controllers/users/validators";
+import { IUser } from "src/controllers/users/helper-schemas";
+import {
+    IAGETAllUsers,
+    IAGETPictureByUserId,
+} from "src/controllers/users/validators";
 import { IUserModel } from "src/models/users";
 import TYPES from "src/types";
 import { docToObj } from "src/utils/db";
@@ -18,11 +22,16 @@ export default class UserService {
         return response;
     }
 
-    public async getPictureByUserId(args: IAGETPictureByUserId): Promise<string> {
-        const {userId} = args;
-        const picture = await this._UserModel.findOne({_id: new ObjectId(userId)}, {picture: 1});
-        if(!picture) throw new Error("Picture Not Found");
-        return picture.picture;
+    public async getPictureByUserId(
+        args: IAGETPictureByUserId
+    ): Promise<Pick<IUser, "picture" | "updatedAt">> {
+        const { userId } = args;
+        const picture = await this._UserModel.findOne(
+            { _id: new ObjectId(userId) },
+            { picture: 1, updatedAt: 1 }
+        );
+        if (!picture) throw new Error("Picture Not Found");
+        return picture;
     }
 
     public async addUser(args: IUserBase): Promise<IAGETAllUsers> {
@@ -31,11 +40,15 @@ export default class UserService {
         return response;
     }
 
-    public static toIndexedUser<T extends {_id: ObjectId, toObject: () => any}>(user: T): T & {id: string};
-    public static toIndexedUser<T extends {_id: ObjectId}>(users: T[]): (T & {id: string})[];
-    public static toIndexedUser<T extends {_id: ObjectId}>(
+    public static toIndexedUser<
+        T extends { _id: ObjectId; toObject: () => any }
+    >(user: T): T & { id: string };
+    public static toIndexedUser<T extends { _id: ObjectId }>(
+        users: T[]
+    ): (T & { id: string })[];
+    public static toIndexedUser<T extends { _id: ObjectId }>(
         users: T | T[]
-    ):  T & {id: string} |  (T & {id: string})[] {
+    ): (T & { id: string }) | (T & { id: string })[] {
         const toIndexedUser = (e: T) => ({
             ...docToObj(e),
             id: e._id.toHexString(),

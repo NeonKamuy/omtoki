@@ -1,9 +1,11 @@
 import { IUserBase } from "shared/interfaces/user";
 import { prop, getModelForClass, DocumentType, modelOptions } from '@typegoose/typegoose';
 import { getTypegooseOptions } from "./db-config/model-options";
+import { IUser } from "src/controllers/users/helper-schemas";
+import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
 
 @modelOptions(getTypegooseOptions("users"))
-class User implements IUserBase {
+class User implements IUser {
     @prop()
     name: string;
 
@@ -18,6 +20,12 @@ class User implements IUserBase {
 
     @prop()
     picture: string;
+
+    @prop()
+    createdAt?: Date;
+
+    @prop()
+    updatedAt?: Date;
 }
 
 const UserModel = getModelForClass(User);

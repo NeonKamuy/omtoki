@@ -1,7 +1,7 @@
 import { mongoose } from "@typegoose/typegoose";
 
 const MongoDBConnection = mongoose.createConnection(
-    "mongodb://localhost/omtoki",
+    "mongodb://omtoki.tk/omtoki",
     {
         ignoreUndefined: true,
         useNewUrlParser: true,
