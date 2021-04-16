@@ -22,6 +22,9 @@ class User implements IUser {
     picture: string;
 
     @prop()
+    status: number;
+
+    @prop()
     createdAt?: Date;
 
     @prop()

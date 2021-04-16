@@ -1,7 +1,11 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ObjectId } from "mongodb";
 import { IUserBase } from "shared/interfaces/user";
-import { IUser } from "src/controllers/users/helper-schemas";
+import {
+    IAAcceptPendingUser,
+    IADeclinePendingUser,
+} from "src/controllers/admin/users/validators";
+import { IUser, UserStatus } from "src/controllers/users/helper-schemas";
 import {
     IAGETAllUsers,
     IAGETPictureByUserId,
@@ -16,10 +20,33 @@ export default class UserService {
         @Inject(TYPES.Models.User) private readonly _UserModel: IUserModel
     ) {}
 
-    public async getAll(): Promise<IAGETAllUsers> {
-        const userDocs = await this._UserModel.find({}, { picture: 0 });
+    public async getAllAccepted(): Promise<IAGETAllUsers> {
+        const userDocs = await this._UserModel.find(
+            { status: UserStatus.accepted },
+            { picture: 0 }
+        );
         const response = UserService.toIndexedUser(userDocs);
         return response;
+    }
+
+    public async getPending(page = 0, perPage = 15): Promise<IAGETAllUsers> {
+        const userDocs = await this._UserModel
+            .find({ status: UserStatus.pending }, { picture: 0 })
+            .skip(page * perPage)
+            .limit(perPage);
+        const response = UserService.toIndexedUser(userDocs);
+        return response;
+    }
+
+    public async acceptPending(args: IAAcceptPendingUser): Promise<void> {
+        await this._UserModel.updateOne(
+            { _id: new ObjectId(args.userId) },
+            { $set: { status: UserStatus.accepted } }
+        );
+    }
+
+    public async declinePending(args: IADeclinePendingUser): Promise<void> {
+        await this._UserModel.deleteOne({ _id: new ObjectId(args.userId) });
     }
 
     public async getPictureByUserId(
@@ -35,8 +62,11 @@ export default class UserService {
     }
 
     public async addUser(args: IUserBase): Promise<IAGETAllUsers> {
-        const userDoc = await this._UserModel.create(args);
-        const response = await this.getAll();
+        const userDoc = await this._UserModel.create({
+            ...args,
+            status: UserStatus.pending,
+        });
+        const response = await this.getAllAccepted();
         return response;
     }
 

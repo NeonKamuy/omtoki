@@ -18,8 +18,8 @@ export class UserController {
     constructor(private readonly _UserService: UserService) {}
 
     @Get("/")
-    public getAll(): Promise<IAGETAllUsers> {
-        return this._UserService.getAll();
+    public getAllAccepted(): Promise<IAGETAllUsers> {
+        return this._UserService.getAllAccepted();
     }
 
     @Get("/picture/:userId")

@@ -12,13 +12,26 @@ export const UserBaseRawSchema = {
 
 export const UserBaseSchema = Joi.object(UserBaseRawSchema);
 
+// User Status
+export enum UserStatus {
+    pending = 0,
+    accepted = 1,
+}
+export const UserStatuses = Object.values(UserStatus);
+
 // User Schema
 export const UserSchema = {
     ...UserBaseRawSchema,
+    userStatus: Joi.number()
+        .integer()
+        .valid(...UserStatuses)
+        .required(),
     createdAt: Joi.date().required(),
     updatedAt: Joi.date().required(),
 };
+
 export interface IUser extends IUserBase {
+    status: UserStatus;
     createdAt?: Date;
     updatedAt?: Date;
 }

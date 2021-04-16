@@ -27,11 +27,11 @@
     "@nestjs/serve-static": "^2.1.4",
     "@typegoose/typegoose": "^7.3.0",
     "joi": "^17.2.1",
+    "js-sha512": "^0.8.0",
     "mongoose": "5.10.0 - 5.10.18",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "sha512": "^0.0.1",
     "stream-buffers": "^3.0.2",
     "tmp": "^0.2.1"
   },

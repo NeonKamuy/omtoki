@@ -15,14 +15,14 @@ export const wValidatedArg = createParamDecorator(
 		const schema = Array.isArray(data) ? data[0] : data;
 		const reqPart =
 			(Array.isArray(data) ? data[1] : defaultReqPart) || defaultReqPart;
-		const object = getObject(req, reqPart);
+		const object = getRequestArgsObject(req, reqPart);
 		return validateSchema(object, schema);
 	}
 );
 
 type ReqPart = "params" | "query" | "body";
 
-function getObject(
+export function getRequestArgsObject(
 	req: Request,
 	reqPart: ReqPart | ReqPart[] = ["params", "query", "body"]
 ) {
