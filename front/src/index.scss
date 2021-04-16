@@ -7,6 +7,10 @@ html, body, #root, .custom-control, .custom-switch {
     padding: 0;
 }
 
+.custom-control, .custom-switch {
+    z-index: auto;
+}
+
 #root {
     position: relative;
     max-width: 100vw;
