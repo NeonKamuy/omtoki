@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Inject, Post, Res } from "@nestjs/common";
+import { Controller, Get, Header, Headers, Inject, Post, Res } from "@nestjs/common";
 import { IUserBase } from "shared/interfaces/user";
 import UserService from "src/services";
 import TYPES from "src/types";
@@ -26,14 +26,24 @@ export class UserController {
     @Header("Content-Type", "image/*")
     public async getPictureByUserId(
         @wValidatedArg(AGETPictureByUserIdSchema) args: IAGETPictureByUserId,
-        @Res() res: Response
+        @Res() res: Response,
+        @Headers() headers: Headers
     ) {
         const {
             picture,
             updatedAt,
         } = await this._UserService.getPictureByUserId(args);
+        const lastModified = new Date(updatedAt);
+        const ifModifiedSince = headers['if-modified-since'] ? new Date(headers['if-modified-since']) : null;
 
-        res.header("Last-Modified", new Date(updatedAt).toUTCString());
+        if(ifModifiedSince && ifModifiedSince >= lastModified) {
+            res.status(304);
+            res.end();
+        }
+
+        res.header("Last-Modified", lastModified.toUTCString());
+        res.header("Cache-Control", "public, max-age=31536000");
+        
         const buffer = Buffer.from(
             picture.replace(/^data:image\/[a-z]+;base64,/, ""),
             "base64"
