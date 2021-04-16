@@ -3,7 +3,7 @@ import { wValidatedArg } from "src/controllers/decorators/validation";
 import { AdminAuthGuard } from "src/controllers/guards/AdminAuthGuard";
 import { IAGETAllUsers } from "src/controllers/users/validators";
 import UserService from "src/services";
-import { AAcceptPendingUserSchema, ADeclinePendingUserSchema, AGETPendingUsersSchema, IAAcceptPendingUser, IADeclinePendingUser, IAGETPendingUsers } from "./validators";
+import { AAcceptPendingUserSchema, ADeclinePendingUserSchema, AGETPendingUsersSchema, IAAcceptPendingUser, IADeclinePendingUser, IAGETPendingUsers, IRGETPendingUsers } from "./validators";
 
 @Controller("/api/admin/users")
 export class AdminUserController {
@@ -13,7 +13,7 @@ export class AdminUserController {
     @UseGuards(AdminAuthGuard)
     public getPending(
         @wValidatedArg(AGETPendingUsersSchema) args: IAGETPendingUsers
-    ): Promise<IAGETAllUsers> {
+    ): Promise<IRGETPendingUsers> {
         return this._UserService.getPending(args.page, args.perPage);
     }
 

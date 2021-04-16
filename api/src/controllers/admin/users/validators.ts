@@ -1,12 +1,17 @@
 import * as Joi from "joi";
-import { AUserIdRawSchema, IAUserId } from "src/controllers/users/validators";
+import { AUserIdRawSchema, IAGETAllUsers, IAUserId } from "src/controllers/users/validators";
 
 // GET Pending Users
 export const AGETPendingUsersSchema = Joi.object({
     page: Joi.number().integer(),
-    perPage: Joi.number().integer()
-})
+    perPage: Joi.number().integer(),
+});
 export type IAGETPendingUsers = Partial<IPagination>;
+
+export interface IRGETPendingUsers {
+    pendingUsers: IAGETAllUsers;
+    pageCount: number;
+}
 
 // Accept Pending User
 export const AAcceptPendingUserSchema = Joi.object(AUserIdRawSchema);

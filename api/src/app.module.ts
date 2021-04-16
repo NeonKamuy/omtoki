@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import { AdminController } from "./controllers/admin";
 import { AdminUserController } from "./controllers/admin/users";
 import { AdminAuthGuard } from "./controllers/guards/AdminAuthGuard";
 import { UserController } from "./controllers/users";
@@ -14,7 +15,7 @@ import TYPES from "./types";
             rootPath: join(__dirname, "../../../front/build"),
         }),
     ],
-    controllers: [UserController, AdminUserController],
+    controllers: [UserController, AdminUserController, AdminController],
     providers: [
         UserService,
         { provide: TYPES.Guards.AdminAuth, useClass: AdminAuthGuard },

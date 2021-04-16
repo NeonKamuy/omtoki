@@ -82,11 +82,12 @@ export const AccountModalForm: React.FC<{
                 skills,
                 tg,
             },
-            onLoaded: () => {
+        })
+            .then(() => {
                 setSuccessOpen(true);
                 setTimeout(() => window.location.reload(), 5000);
-            },
-        }).finally(() => setIsLoading(false));
+            })
+            .finally(() => setIsLoading(false));
     }, []);
 
     const { setUserInfo, userInfoRef } = useUserInfo();

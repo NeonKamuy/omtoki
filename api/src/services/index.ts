@@ -4,6 +4,7 @@ import { IUserBase } from "shared/interfaces/user";
 import {
     IAAcceptPendingUser,
     IADeclinePendingUser,
+    IRGETPendingUsers,
 } from "src/controllers/admin/users/validators";
 import { IUser, UserStatus } from "src/controllers/users/helper-schemas";
 import {
@@ -29,13 +30,23 @@ export default class UserService {
         return response;
     }
 
-    public async getPending(page = 0, perPage = 15): Promise<IAGETAllUsers> {
+    public async getPending(
+        page = 0,
+        perPage = 15
+    ): Promise<IRGETPendingUsers> {
         const userDocs = await this._UserModel
             .find({ status: UserStatus.pending }, { picture: 0 })
             .skip(page * perPage)
             .limit(perPage);
-        const response = UserService.toIndexedUser(userDocs);
-        return response;
+
+        const pageCount = Math.floor(
+            (await this._UserModel.countDocuments({
+                status: UserStatus.pending,
+            })) / perPage
+        );
+
+        const pendingUsers = UserService.toIndexedUser(userDocs);
+        return { pendingUsers, pageCount };
     }
 
     public async acceptPending(args: IAAcceptPendingUser): Promise<void> {
