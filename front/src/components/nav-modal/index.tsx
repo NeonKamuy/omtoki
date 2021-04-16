@@ -40,19 +40,16 @@ export const BurgerModalButton: React.FC<{}> = React.memo(() => {
             >
                 <ListGroup className="text-center burger-list-group">
                     <ListGroup.Item action>
-                        <span>Home</span>
+                        <span>О Нас</span>
                     </ListGroup.Item>
                     <ListGroup.Item action>
-                        <span>Ave html template portfolio</span>
+                        <span>Проекты</span>
                     </ListGroup.Item>
                     <ListGroup.Item action>
-                        <span>About</span>
+                        <span>Мероприятия</span>
                     </ListGroup.Item>
                     <ListGroup.Item action>
-                        <span>Blog</span>
-                    </ListGroup.Item>
-                    <ListGroup.Item action>
-                        <span>Contact</span>
+                        <span>Контакты</span>
                     </ListGroup.Item>
                 </ListGroup>
             </Modal>
