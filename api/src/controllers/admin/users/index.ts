@@ -1,9 +1,9 @@
 import { Controller, Get, Inject, UseGuards } from "@nestjs/common";
-import { wValidatedArg } from "src/controllers/decorators/validation";
-import { AdminAuthGuard } from "src/controllers/guards/AdminAuthGuard";
+import { wValidatedArg } from "src/utils/decorators/validation";
 import { IAGETAllUsers } from "src/controllers/users/validators";
-import UserService from "src/services";
 import { AAcceptPendingUserSchema, ADeclinePendingUserSchema, AGETPendingUsersSchema, IAAcceptPendingUser, IADeclinePendingUser, IAGETPendingUsers, IRGETPendingUsers } from "./validators";
+import { AdminAuthGuard } from "src/utils/guards/AdminAuthGuard";
+import UserService from "src/services/users";
 
 @Controller("/api/admin/users")
 export class AdminUserController {

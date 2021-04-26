@@ -3,7 +3,7 @@ import { createParamDecorator, ExecutionContext } from "@nestjs/common";
 import { Request } from "express";
 import validateSchema, {
 	validateObjectId,
-} from "../../utils/validate-schema";
+} from "../validate-schema";
 
 const defaultReqPart: ReqPart[] = ["params", "query", "body"];
 

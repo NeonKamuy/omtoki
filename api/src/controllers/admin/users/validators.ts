@@ -1,4 +1,5 @@
 import * as Joi from "joi";
+import { IPagination } from "shared/interfaces/pagination";
 import { AUserIdRawSchema, IAGETAllUsers, IAUserId } from "src/controllers/users/validators";
 
 // GET Pending Users

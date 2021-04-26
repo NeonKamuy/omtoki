@@ -1,6 +1,6 @@
 import { Controller, Get, UseGuards } from "@nestjs/common";
-import { wValidatedArg } from "../decorators/validation";
-import { AdminAuthGuard } from "../guards/AdminAuthGuard";
+import { AdminAuthGuard } from "src/utils/guards/AdminAuthGuard";
+import { wValidatedArg } from "../../utils/decorators/validation";
 
 @Controller("/api/admin/main")
 export class AdminController {

@@ -1,8 +1,6 @@
 import { Controller, Get, Header, Headers, Inject, Post, Res } from "@nestjs/common";
 import { IUserBase } from "shared/interfaces/user";
-import UserService from "src/services";
-import TYPES from "src/types";
-import { wValidatedArg } from "../decorators/validation";
+import { wValidatedArg } from "../../utils/decorators/validation";
 import { UserBaseSchema } from "./helper-schemas";
 import {
     AGETPictureByUserIdSchema,
@@ -12,6 +10,8 @@ import {
 import { Response } from "express";
 import * as tmp from "tmp";
 import * as fs from "fs";
+import { base64ToFileBuffer } from "src/utils/base64-to-file-buffer";
+import UserService from "src/services/users";
 
 @Controller("/api/users")
 export class UserController {
@@ -44,10 +44,7 @@ export class UserController {
         res.header("Last-Modified", lastModified.toUTCString());
         res.header("Cache-Control", "public, max-age=31536000");
         
-        const buffer = Buffer.from(
-            picture.replace(/^data:image\/[a-z]+;base64,/, ""),
-            "base64"
-        );
+        const buffer = base64ToFileBuffer(picture);
 
         tmp.dir({}, (e, tempDir) => {
             const filename = `${tempDir}/${Date.now() + args.userId}`;

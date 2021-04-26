@@ -1,3 +1,5 @@
+import { ToIndexed } from "./utils";
+
 // Minimal Common Information About Single User
 export interface IUserBase {
     name: string;
@@ -8,9 +10,7 @@ export interface IUserBase {
 }
 
 // Single User With Id
-export interface IIndexedUser extends IUserBase {
-    id: string;
-}
+export type IIndexedUser = ToIndexed<IUserBase>;
 
 // Indexed User Without Picture
 export type IIndexedUserMeta = Omit<IIndexedUser, "picture">;
